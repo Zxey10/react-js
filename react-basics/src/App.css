@@ -1,7 +1,8 @@
 .App{
   padding: 0;
   margin: 0;
-  background-color: #212121;
+  background-color: coral;
   text-align: center;
   min-height: 100vh;
+  overflow: hidden;
 }
