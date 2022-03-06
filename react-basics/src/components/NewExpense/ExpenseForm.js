@@ -3,9 +3,9 @@ import './ExpenseForm.css'
 
 export default function ExpenseForm() {
 
-    // const [titleValue,setTitleValue] = useState('');
-    // const [amountValue,setAmountValue] = useState('');
-    // const [dateValue,setDateValue] = useState('');
+    const [titleValue,setTitleValue] = useState('');
+    const [amountValue,setAmountValue] = useState('');
+    const [dateValue,setDateValue] = useState('');
 
     const [userInput,setUserInput] = useState({
         titleValue:'',
@@ -14,27 +14,27 @@ export default function ExpenseForm() {
     })
 
     function titleChangeHandler(e){
-        //setTitleValue(e.target.value)
-        setUserInput({
-            ...userInput,
-            titleValue:e.target.value,
-        })
+        setTitleValue(e.target.value)
+        // setUserInput({
+        //     ...userInput,
+        //     titleValue:e.target.value,
+        // })
     }
     
     function amountChangeHandler(e){
-        //setAmountValue(e.target.value)
-        setUserInput({
-            ...userInput,
-            amountValue:e.target.value,
-        })
+        setAmountValue(e.target.value)
+        // setUserInput({
+        //     ...userInput,
+        //     amountValue:e.target.value,
+        // })
     }  
 
     function dateChangeHandler(e){
-        //setDateValue(e.target.value)
-        setUserInput({
-            ...userInput,
-            dateValue:e.target.value,
-        })
+        setDateValue(e.target.value)
+        // setUserInput({
+        //     ...userInput,
+        //     dateValue:e.target.value,
+        // })
     }  
 
 
