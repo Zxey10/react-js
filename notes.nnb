@@ -1,0 +1,39 @@
+{
+    "cells": [
+        {
+            "language": "typescript",
+            "source": [
+                "//! Set State depending on previous State\r\n\r\nconst [userInput,setUserInput] = useState({\r\n    titleValue:'',\r\n    amountValue:'',\r\n    dateValue:''\r\n})\r\n\r\nsetUserInput(prevState => {\r\n    return {...prevState,titleValue:e.target.value}\r\n})\r\n\r\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! 3 Ways to useState()\r\n\r\nfunction handleChange(){\r\n        setDateValue(e.target.value)\r\n        setUserInput({\r\n            ...userInput,\r\n            dateValue:e.target.value,\r\n        })\r\n        setUserInput(prevState => {\r\n            return {...prevState,dateValue:e.target.value}\r\n         })\r\n}"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! Form Submission\r\n\r\nfunction handleSubmit(e){\r\n\r\n    e.preventDefault()\r\n\r\n    const expenseData = {\r\n        title:titleValue,\r\n        amount:amountValue,\r\n        date:new Date(dateValue)\r\n    }\r\n    console.log(expenseData);        \r\n}\r\n\r\n<form onSubmit={handleSubmit}></form>"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! Two Way Binding\r\n\r\n<input type='text' value={titleValue} onChange={titleChangeHandler}/>"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! Pass DATA from Child to Parent\r\n\r\n//? From Here\r\n\r\n\r\n\r\nimport React, {useState} from 'react'\r\nimport './ExpenseForm.css'\r\n\r\nexport default function ExpenseForm(props) {\r\n\r\n    const [titleValue,setTitleValue] = useState('');\r\n    const [amountValue,setAmountValue] = useState('');\r\n    const [dateValue,setDateValue] = useState('');\r\n\r\n    function titleChangeHandler(e){\r\n        setTitleValue(e.target.value)\r\n    }\r\n    \r\n    function amountChangeHandler(e){\r\n        setAmountValue(e.target.value)\r\n    }  \r\n\r\n    function dateChangeHandler(e){\r\n        setDateValue(e.target.value)\r\n    }  \r\n\r\n    function handleSubmit(e){\r\n\r\n        e.preventDefault()\r\n\r\n        const expenseData = {\r\n            title:titleValue,\r\n            amount:amountValue,\r\n            date:new Date(dateValue)\r\n        }\r\n        props.onSaveExpenseData(expenseData);\r\n        setTitleValue('')\r\n        setAmountValue('')\r\n        setDateValue('')\r\n    }\r\n    \r\n  return (\r\n    <form onSubmit={handleSubmit}>\r\n        <div className='new-expense__controls'>\r\n            <div className='new-expense__control'>\r\n                <label>Title</label>\r\n                <input type='text' value={titleValue} onChange={titleChangeHandler}/>\r\n            </div>\r\n            <div className='new-expense__control'>\r\n                <label>Amount</label>\r\n                <input type='number' value={amountValue} min=\"0.01\" step=\"0.01\" onChange={amountChangeHandler}/>\r\n            </div>\r\n            <div className='new-expense__control'>\r\n                <label>Date</label>\r\n                <input type='date' value={dateValue} min=\"2019-01-01\" max=\"2022-12-31\" onChange={dateChangeHandler}/>\r\n            </div>\r\n        </div>\r\n        <div className='new-expense__actions'>\r\n            <button type='submit'>Add Expense</button>\r\n        </div>\r\n    </form>\r\n  )\r\n}\r\n\r\n//? To Here\r\nexport default function NewExpense() {\r\n\r\n    function saveExpenseHandler(enteredExpenseData){\r\n      const expenseData = {\r\n        ...enteredExpenseData,\r\n        id: Math.random().toString()\r\n      }\r\n      console.log(expenseData)\r\n    }  \r\n  \r\n    return (\r\n      <div className='new-expense'>\r\n         <ExpenseForm onSaveExpenseData={saveExpenseHandler}/>\r\n      </div>\r\n    )\r\n  }"
+            ],
+            "outputs": []
+        }
+    ]
+}

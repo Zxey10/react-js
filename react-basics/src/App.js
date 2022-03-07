@@ -10,16 +10,19 @@ const App = () => {
 
   const expenses = [
     {id:1,title:'Car Insurance',amount:294.67,date:new Date(2021,2,28)},
-    {id:2,title:'Car Insurance',amount:294.67,date:new Date(2021,2,28)},
-    {id:3,title:'Car Insurance',amount:294.67,date:new Date(2021,2,28)},
-    {id:4,title:'Car Insurance',amount:294.67,date:new Date(2021,2,28)},
+    {id:2,title:'Toiler Paper',amount:14.89,date:new Date(2021,2,28)},
+    {id:3,title:'Electricity',amount:100.31,date:new Date(2021,2,28)},
+    {id:4,title:'Food',amount:300,date:new Date(2021,2,28)},
 
   ]
 
+  const addExpenseHandler = (expense) => {
+    console.log(expense)
+  }
 
   return (
     <div className="App"> 
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler}/>
       <Expenses expenses={expenses}/>
     </div>
   );
