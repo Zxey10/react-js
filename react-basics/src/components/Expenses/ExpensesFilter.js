@@ -4,13 +4,14 @@ import './ExpensesFilter.css';
 
 const ExpensesFilter = (props) => {
 
+
   function selectValueHandler(e){
     //setSelectValue(e.target.value)
     props.addExpenseFilter(e.target.value)
   }  
 
   function sortExpensesByDate(){
-    props.onSortExpenses(props.expenses)
+    props.onSortExpenses()
   }
 
   return (
@@ -24,7 +25,7 @@ const ExpensesFilter = (props) => {
           <option value='2019'>2019</option>
         </select>
       </div>
-      <button onClick={sortExpensesByDate}>SORT BY DATE</button>
+      <button onClick={sortExpensesByDate}>SORT BY AMOUNT</button>
     </div>
   );
 };

@@ -7,7 +7,8 @@ import './Expenses.css'
 
 export default function Expenses({expenses,onGetSortedExpenses}) {
 
-  const [yearSelected,setYearSelected] = useState('2021')  
+  const [yearSelected,setYearSelected] = useState('2021')
+  const [isClicked,setIsClicked] = useState(false) 
 
   function onAddExpenseFilter(year){
     setYearSelected(year)
@@ -17,16 +18,26 @@ export default function Expenses({expenses,onGetSortedExpenses}) {
     return expense.date.getFullYear().toString() === yearSelected
   })
 
-  function sortExpenses(expenses){
-    expenses.sort(function(a,b){return new Date(a.date) - new Date(b.date)})
-    onGetSortedExpenses(expenses)
+  function sortExpenses(){
+    setIsClicked(prevCheck => !prevCheck)
   }
+
+  //const sortedExpenses = filteredExpenses.sort(function(a,b){return new Date(a.date) - new Date(b.date)})
+   const sortedExpenses = [...filteredExpenses]
+   sortedExpenses.sort(function(a,b){return a.amount - b.amount})
+   console.log(filteredExpenses);
+   console.log(sortedExpenses);
 
   return (
    <div>
       <Card className="expenses">
       <ExpensesFilter expenses={expenses} selected={yearSelected} addExpenseFilter={onAddExpenseFilter} onSortExpenses={sortExpenses}/>
-         {filteredExpenses.map(expense => (
+         { isClicked ? 
+          sortedExpenses.map(expense => (
+          <ExpenseItem key={expense.id} expense={expense}/>
+       ))
+         :
+         filteredExpenses.map(expense => (
          <ExpenseItem key={expense.id} expense={expense}/>
       ))}   
     </Card>
