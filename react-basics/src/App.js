@@ -9,12 +9,12 @@ const App = () => {
   const [url,setUrl] = useState('/api/')
 
   const [expenses,setExpenses] = useState([
-    {id:1,title:'Car Insurance',amount:294.67,date:new Date(2021,2,28)},
-    {id:2,title:'Toiler Paper',amount:14.89,date:new Date(2021,2,30)},
-    {id:3,title:'Electricity',amount:100.31,date:new Date(2021,2,29)},
-    {id:4,title:'Food',amount:300,date:new Date(2021,2,16)},
-    {id:1,title:'Car Insurance 2',amount:294.67,date:new Date(2022,2,31)},
-    {id:2,title:'Toiler Paper 2',amount:14.89,date:new Date(2022,2,30)},
+    {id:1,title:'Car Insurance',amount:294.67,date:new Date(2021,1,28)},
+    {id:2,title:'Toiler Paper',amount:14.89,date:new Date(2021,8,30)},
+    {id:3,title:'Electricity',amount:100.31,date:new Date(2021,8,29)},
+    {id:4,title:'Food',amount:300,date:new Date(2021,8,16)},
+    {id:1,title:'Car Insurance 2',amount:294.67,date:new Date(2022,3,31)},
+    {id:2,title:'Toiler Paper 2',amount:14.89,date:new Date(2022,6,30)},
     {id:3,title:'Electricity 2',amount:100.31,date:new Date(2020,2,29)},
     {id:4,title:'Food 2',amount:300,date:new Date(2020,2,16)},
   ])

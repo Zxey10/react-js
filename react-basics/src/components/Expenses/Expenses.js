@@ -3,6 +3,7 @@ import ExpenseItem from './ExpenseItem'
 import Card from '../UI/Card'
 import ExpensesFilter from './ExpensesFilter'
 import ExpensesList from './ExpensesList'
+import ExpensesChart from './ExpensesChart'
 import './Expenses.css'
 
 
@@ -32,6 +33,7 @@ export default function Expenses({ expenses, onGetSortedExpenses }) {
     <div>
       <Card className="expenses">
         <ExpensesFilter expenses={expenses} selected={yearSelected} addExpenseFilter={onAddExpenseFilter} onSortExpenses={sortExpenses} />
+        <ExpensesChart expenses={filteredExpenses}/>
         <ExpensesList filteredExpenses={filteredExpenses} sortedExpenses={sortedExpenses} isClicked={isClicked}/>
       </Card>
     </div>
