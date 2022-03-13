@@ -1,0 +1,19 @@
+form{
+    display: flex;
+    flex-direction: column;
+}
+form label{
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+}
+form input{
+    margin-bottom: 0.5rem;
+}
+form button{
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    width: 100px;
+    background-color: purple;
+    border: none;
+    color: white;
+}
