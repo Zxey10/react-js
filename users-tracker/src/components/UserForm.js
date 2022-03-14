@@ -2,23 +2,13 @@ import React,{ useState } from 'react'
 import Card from '../components/Card';
 import './UserForm.css'
 
-export default function UserForm({createUser}) {
+export default function UserForm({createUser,getUserAndAge}) {
 
     const [username,setUsername] = useState('');
     const [age,setAge] = useState('');
 
     function submitHandler(e){
         e.preventDefault();
-
-        if(username.trim().length === 0){
-            //sendUsernameError();
-            return;
-        }
-
-        if(age <= 0){
-            //sendAgeError();
-            return
-        }
         
         const user = {
             username,
