@@ -1,0 +1,3 @@
+1. Add CSS Modules to notes
+2. Review Rendering Conditionals and add them to notes
+ 
