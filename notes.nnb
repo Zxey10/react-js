@@ -62,6 +62,20 @@
                 "<>\r\n    <input ref={nameInputRef}  onChange={usernameHandler}></input> //* Uncontrolled Input (no value)\r\n    <input ref={ageInputRef} value={age} onChange={ageHandler}></input> //* Controlled Input (has value)\r\n</>"
             ],
             "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! useEffect HOOK\r\n\r\n  useEffect(() => {\r\n    const storedUserInfo = localStorage.getItem('isLoggedIn')\r\n    if(storedUserInfo === '1'){\r\n      setIsLoggedIn(true)\r\n    }\r\n  },[])\r\n\r\n//? runs just one time when the app starts because the dependescies cannot change after because they are empty\r\n//!  [] - dependencies\r\n\r\n\r\nuseEffect(() => {\r\n  setFormIsValid(\r\n    enteredEmail.includes('@') && enteredPassword.trim().length > 6\r\n  );\r\n},[enteredEmail,enteredPassword])\r\n\r\n//? runs when one or both change\r\n//! [enteredEmail,enteredPassword] - dependencies"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! Local Storage\r\n\r\nuseEffect(() => {\r\n  const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))\r\n  if (storedTodos) setTodos(storedTodos)\r\n}, [])\r\n\r\nuseEffect(() => {\r\n  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))\r\n}, [todos])"
+            ],
+            "outputs": []
         }
     ]
 }
