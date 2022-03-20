@@ -76,6 +76,20 @@
                 "//! Local Storage\r\n\r\nuseEffect(() => {\r\n  const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))\r\n  if (storedTodos) setTodos(storedTodos)\r\n}, [])\r\n\r\nuseEffect(() => {\r\n  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))\r\n}, [todos])"
             ],
             "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! useEffect Cleanup\r\n\r\n\r\nuseEffect(() => {\r\n    const id = setTimeout(() => {\r\n      setFormIsValid(\r\n        enteredEmail.includes('@') && enteredPassword.trim().length > 6\r\n      );\r\n    },500);\r\n    return () => {\r\n      console.log('Cleanup');\r\n      clearTimeout(id)\r\n    }\r\n  },[enteredEmail,enteredPassword])"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! useReducer\r\n\r\nconst [emailState,dispatchEmail] = useReducer(emailReducer,{\r\n    value: '',\r\n    isValid: false\r\n  })\r\n\r\n  const [passwordState,dispatchPassword] = useReducer(passwordReducer,{\r\n    value: '',\r\n    isValid: false\r\n  })\r\n\r\n  const EMAIL_ACTIONS = {\r\n    USER_INPUT: 'USER_INPUT',\r\n    INPUT_BLUR: 'INPUT_BLUR'\r\n  }\r\n  \r\n  const PASSWORD_ACTIONS = {\r\n    USER_INPUT: 'USER_INPUT',\r\n    INPUT_BLUR: 'INPUT_BLUR'\r\n  }\r\n  \r\n  const emailReducer = (state,action) => {\r\n    if(action.type === EMAIL_ACTIONS.USER_INPUT){\r\n      return {value: action.payload ,isValid: action.payload.includes('@')}\r\n    }\r\n    if(action.type === EMAIL_ACTIONS.INPUT_BLUR){\r\n      return {value: state.value ,isValid: state.value.includes('@')}\r\n    }\r\n    return {value: '' ,isValid: false}\r\n  }\r\n  \r\n  const passwordReducer = (state,action) => {\r\n    switch(action.type){\r\n      case PASSWORD_ACTIONS.USER_INPUT:\r\n        return {value: action.payload ,isValid: action.payload.trim().length > 6}\r\n      case PASSWORD_ACTIONS.INPUT_BLUR:\r\n        return {value: state.value ,isValid: state.value.trim().length > 6}\r\n      default:\r\n        return state;    \r\n    }\r\n  }\r\n\r\n  const emailChangeHandler = (event) => {\r\n    //setEnteredEmail(event.target.value);\r\n\r\n    dispatchEmail({\r\n      type: 'USER_INPUT',\r\n      payload: event.target.value\r\n    })\r\n    \r\n    // setFormIsValid(\r\n    //   event.target.value.includes('@') && passwordState.isValid\r\n    // );\r\n  };\r\n\r\n  const passwordChangeHandler = (event) => {\r\n    //setEnteredPassword(event.target.value);\r\n\r\n     dispatchPassword({\r\n       type: PASSWORD_ACTIONS.USER_INPUT,\r\n       payload: event.target.value\r\n     }) \r\n\r\n    // setFormIsValid(\r\n    //   emailState.isValid && passwordState.isValid\r\n    // );\r\n\r\n  };\r\n\r\n  const validateEmailHandler = () => {\r\n    // setEmailIsValid(emailState.isValid);\r\n    dispatchEmail({\r\n      type: 'INPUT_BLUR'\r\n    })\r\n  };\r\n\r\n  const validatePasswordHandler = () => {\r\n    //setPasswordIsValid(enteredPassword.trim().length > 6);\r\n    dispatchPassword({\r\n      type: PASSWORD_ACTIONS.INPUT_BLUR\r\n    })\r\n  };"
+            ],
+            "outputs": []
         }
     ]
 }
