@@ -97,6 +97,13 @@
                 "//! useContext\r\n\r\n//? App.js\r\n\r\nreturn (\r\n    <React.Fragment>\r\n      <AuthContext.Provider value={{isLoggedIn: isLoggedIn}}>\r\n        <MainHeader  onLogout={logoutHandler} />\r\n        <main>\r\n          {!isLoggedIn && <Login onLogin={loginHandler} />}\r\n          {isLoggedIn && <Home onLogout={logoutHandler} />}\r\n        </main>\r\n      </AuthContext.Provider>\r\n    </React.Fragment>\r\n  );\r\n\r\n//? Navigation.js\r\n\r\nconst ctx = useContext(AuthContext)\r\n\r\nreturn (\r\n  <nav className={classes.nav}>\r\n    <ul>\r\n      {ctx.isLoggedIn && (\r\n        <li>\r\n          <a href=\"/\">Users</a>\r\n        </li>\r\n      )}\r\n      {ctx.isLoggedIn && (\r\n        <li>\r\n          <a href=\"/\">Admin</a>\r\n        </li>\r\n      )}\r\n      {ctx.isLoggedIn && (\r\n        <li>\r\n          <button onClick={props.onLogout}>Logout</button>\r\n        </li>\r\n      )}\r\n    </ul>\r\n  </nav>\r\n)\r\n\r\n//? store/auth-context.js\r\n\r\nimport React from 'react'\r\n\r\nconst AuthContext = React.createContext({\r\n    isLoggedIn: false\r\n});\r\n\r\nexport default AuthContext;\r\n\r\n"
             ],
             "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! Forward Refs\r\n\r\n//? Login.js\r\n\r\nconst submitHandler = (event) => {\r\n    event.preventDefault();\r\n    if(formIsValid){\r\n      ctx.onLogin(emailState.value, passwordState.value);\r\n    }else if(!emailIsValid){\r\n      emailInputRef.current.focus()\r\n    }else{\r\n      passwordInputRef.current.focus()\r\n    }\r\n  };\r\n\r\n  <Input\r\n          className={`${classes.control} ${\r\n            emailState.isValid === false ? classes.invalid : ''\r\n          }`}\r\n          ref={emailInputRef}\r\n          labelText='Email'\r\n          htmlFor=\"email\"\r\n          id='email'\r\n          value={emailState.value}\r\n          onChange={emailChangeHandler}\r\n          onBlur={validateEmailHandler}\r\n       />\r\n\r\n//? Input.js\r\n\r\n\r\nconst inputRef = useRef()\r\n\r\nconst activate = () => {\r\n  inputRef.current.focus()\r\n}\r\n\r\nuseImperativeHandle(ref, () => {\r\n  return {\r\n    focus: activate\r\n  }\r\n})\r\n\r\nreturn (\r\n    <div className={props.className}>\r\n       <label htmlFor={props.htmlFor}>{props.labelText}</label>\r\n          <input\r\n            ref={inputRef}\r\n            type={props.type}\r\n            id={props.id}\r\n            value={props.value}\r\n            onChange={props.onChange}\r\n            onBlur={props.onBlur}\r\n          />\r\n    </div>"
+            ],
+            "outputs": []
         }
     ]
 }
