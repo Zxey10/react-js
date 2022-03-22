@@ -1,0 +1,45 @@
+.cart{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #212121;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    width: 70%;
+    border-radius: 12px;
+    height: 250px;
+}
+.cart .infoOrder{
+    display: flex;
+    height: 50%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #212121;
+    width: 90%;
+}
+
+.cart .totalOrder{
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.overlay{
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+}
