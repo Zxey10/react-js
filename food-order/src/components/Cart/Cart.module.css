@@ -43,3 +43,7 @@
     background-color: rgba(0,0,0,0.5);
     z-index: 2;
 }
+.cart h2{
+    margin-top: 1rem;
+    color: #212121;
+}

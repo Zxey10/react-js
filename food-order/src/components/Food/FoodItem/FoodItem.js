@@ -7,6 +7,7 @@ import styles from './FoodItem.module.css'
 export default function FoodItem(props) {
 
     const [amountValue,setAmountValue] = useState(1)
+    const [isInCart,setIsInCart] = useState(false)
     const ctx = useContext(AuthContext)
 
 
@@ -16,8 +17,10 @@ export default function FoodItem(props) {
     }
 
     function addItemToCart(){
-        ctx.addItem(props.meal)
+        ctx.addItem(props.meal,amountValue,isInCart)
+        setIsInCart(true)
         ctx.addOnSize(amountValue)
+        ctx.addOnTotal(props.meal.price * amountValue)
     }
 
     return (

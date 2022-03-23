@@ -11,11 +11,11 @@ function App() {
 
   const [meals, setMeals] = useState([
     { id: Math.random().toString(), name: 'Food 1', price: '32', info: "Just some random info" },
-    { id: Math.random().toString(), name: 'Food 2', price: '32', info: "Just some random info" },
-    { id: Math.random().toString(), name: 'Food 3', price: '32', info: "Just some random info" },
-    { id: Math.random().toString(), name: 'Food 4', price: '32', info: "Just some random info" },
-    { id: Math.random().toString(), name: 'Food 5', price: '32', info: "Just some random info" },
-    { id: Math.random().toString(), name: 'Food 6', price: '32', info: "Just some random info" },
+    { id: Math.random().toString(), name: 'Food 2', price: '12', info: "Just some random info" },
+    { id: Math.random().toString(), name: 'Food 3', price: '43', info: "Just some random info" },
+    { id: Math.random().toString(), name: 'Food 4', price: '65', info: "Just some random info" },
+    { id: Math.random().toString(), name: 'Food 5', price: '67', info: "Just some random info" },
+    { id: Math.random().toString(), name: 'Food 6', price: '23', info: "Just some random info" },
   ])
 
   return (

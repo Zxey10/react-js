@@ -2,6 +2,8 @@ import React from 'react'
 import Card from '../UI/Card/Card'
 import styles from './Header.module.css'
 
+//! import foodImg from '../img/food.jpg'
+
 /* <img src={process.env.PUBLIC_URL + '/img/food.jpg'} alt='food'></img> */
 
 export default function Header() {
