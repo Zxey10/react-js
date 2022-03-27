@@ -3,7 +3,10 @@ import styles from './Header.module.css'
 import food_img from '../../assets/food.jpg'
 import HeaderCartButton from './HeaderCartButton'
 
+
 export default function Header(props) {
+
+
   return (
     <Fragment>
       <header className={styles.header}>
