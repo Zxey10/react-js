@@ -28,6 +28,10 @@ export default function Cart(props) {
     />
   ));
 
+  function orderFood(){
+    cartCtx.sendOrder()
+  }
+
   return (
     <Modal onClose={props.onHideCart}>
       <ul className={styles["cart-items"]}>{cartItems}</ul>
@@ -39,7 +43,7 @@ export default function Cart(props) {
         <button className={styles["button--alt"]} onClick={props.onHideCart}>
           Close
         </button>
-        {hasItem && <button className={styles.button}>Order</button>}
+        {hasItem && <button onClick={orderFood} className={styles.button}>Order</button>}
       </div>
     </Modal>
   );

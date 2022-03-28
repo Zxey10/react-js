@@ -34,7 +34,7 @@ export default function MealItemForm(props) {
         step: '1',
         defaultValue: '1'
       }}/>
-      <button>+ Add</button>
+      <button type='submit'>+ Add</button>
       {!amountIsValid && <p>Enter a valid Amount</p>}
     </form>
   )

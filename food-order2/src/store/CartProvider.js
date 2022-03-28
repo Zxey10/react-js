@@ -3,12 +3,14 @@ import CartContext from './cart-context'
 
 const defaultCartState = {
     items: [],
-    totalAmount: 0
+    totalAmount: 0,
+    orders: 0
 }
 
 const ACTIONS = {
     addItem : 'ADD_ITEM',
-    removeItem : 'REMOVE_ITEM'
+    removeItem : 'REMOVE_ITEM',
+    order: 'ORDER'
 }
 
 const cartReducer = (state,action) => {
@@ -36,7 +38,8 @@ const cartReducer = (state,action) => {
             
             return {
                 items: updatedItems,
-                totalAmount: newTotalAmount
+                totalAmount: newTotalAmount,
+                orders: state.orders
             }
         case ACTIONS.removeItem:            
             const existingCartItemIndex2 = state.items.findIndex(item => item.id === action.id)
@@ -52,8 +55,15 @@ const cartReducer = (state,action) => {
             }
             return {
                 items: updatedItems2,
-                totalAmount: updatedTotalAmount
+                totalAmount: updatedTotalAmount,
+                orders: state.orders
             }
+        case ACTIONS.order:
+            return {
+                items: state.items,
+                totalAmount: state.totalAmount,
+                orders: state.orders + 1
+            }    
         default:
             break;
     }
@@ -79,11 +89,19 @@ export default function CartProvider(props) {
     });
   } 
 
+  const sendOrderHandler = () => {
+      dispatchCartAction({
+          type: ACTIONS.order
+      });
+  }
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
     removeItem: removeItemHandler,
+    orders: cartState.orders,
+    sendOrder: sendOrderHandler,
   }  
 
   return (
