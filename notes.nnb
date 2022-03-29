@@ -104,6 +104,27 @@
                 "//! Forward Refs\r\n\r\n//? Login.js\r\n\r\nconst submitHandler = (event) => {\r\n    event.preventDefault();\r\n    if(formIsValid){\r\n      ctx.onLogin(emailState.value, passwordState.value);\r\n    }else if(!emailIsValid){\r\n      emailInputRef.current.focus()\r\n    }else{\r\n      passwordInputRef.current.focus()\r\n    }\r\n  };\r\n\r\n  <Input\r\n          className={`${classes.control} ${\r\n            emailState.isValid === false ? classes.invalid : ''\r\n          }`}\r\n          ref={emailInputRef}\r\n          labelText='Email'\r\n          htmlFor=\"email\"\r\n          id='email'\r\n          value={emailState.value}\r\n          onChange={emailChangeHandler}\r\n          onBlur={validateEmailHandler}\r\n       />\r\n\r\n//? Input.js\r\n\r\n\r\nconst inputRef = useRef()\r\n\r\nconst activate = () => {\r\n  inputRef.current.focus()\r\n}\r\n\r\nuseImperativeHandle(ref, () => {\r\n  return {\r\n    focus: activate\r\n  }\r\n})\r\n\r\nreturn (\r\n    <div className={props.className}>\r\n       <label htmlFor={props.htmlFor}>{props.labelText}</label>\r\n          <input\r\n            ref={inputRef}\r\n            type={props.type}\r\n            id={props.id}\r\n            value={props.value}\r\n            onChange={props.onChange}\r\n            onBlur={props.onBlur}\r\n          />\r\n    </div>"
             ],
             "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! React MEMO \r\nimport React from 'react'\r\n\r\nfunction Button(props) {\r\n  console.log('Button Running');\r\n  return (\r\n    <button onClick={props.onClick}>{props.children}</button>\r\n  )\r\n}\r\n\r\nexport default React.memo(Button)"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! useCallback\r\n\r\nimport React, { useState, useCallback } from 'react';\r\nimport Demo from './components/UI/Button/Demo';\r\nimport Button from './components/Button';\r\n\r\nimport './App.css';\r\n\r\nfunction App() {\r\n\r\n  const [isVisible,setIsVisible] = useState(false)\r\n  const [allow,setAllow] = useState(false); \r\n\r\n  const clickHandler = useCallback(() => {\r\n    if(allow){\r\n      setIsVisible(prev => !prev); \r\n      console.log('LOL');\r\n    }\r\n  },[allow]);\r\n\r\n  const allowHandler = () => {\r\n    setAllow(true)\r\n  }\r\n\r\n  return (\r\n    <div className=\"app\">\r\n      <Demo show={isVisible}/>\r\n      <Button onClick={allowHandler}>Allow Toggling</Button>\r\n      <Button onClick={clickHandler}>Toggle Paragraph</Button>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default App;\r\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! useMemo\r\n\r\n//? App.js\r\n\r\nlet arr = useMemo(() => {\r\n    return [1,6,23,99,16];\r\n  },[])\r\n\r\nreturn (\r\n    <div className=\"app\">\r\n      <Demo show={isVisible}/>\r\n      <DemoList title={listTitle} items={arr} />\r\n      <Button onClick={allowHandler}>Allow Toggling</Button>\r\n      <Button onClick={clickHandler}>Toggle Paragraph</Button>\r\n      <Button onClick={changeTitleHandler}>Change Title</Button>\r\n    </div>\r\n  );\r\n\r\n  //? DemoList.js\r\n\r\n  import React, { useMemo } from 'react'\r\n\r\nfunction DemoList(props) {\r\n\r\n  const sortedArr = useMemo (() => {\r\n      console.log('Items Sorted');\r\n      return  props.items.sort((a,b) => a-b)  \r\n  },[props.items])\r\n\r\n  console.log('DemoListRunning');\r\n\r\n  return (\r\n    <div>\r\n      <p>{props.title}</p>\r\n      <ul>\r\n         {\r\n            sortedArr.map(item => {\r\n                return <li key={item}>{item}</li>\r\n            })\r\n         }\r\n      </ul>\r\n    </div>\r\n  )\r\n}\r\n\r\nexport default React.memo(DemoList)\r\n"
+            ],
+            "outputs": []
         }
     ]
 }
