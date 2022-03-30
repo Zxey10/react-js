@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import NotFound from './components/NotFound';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import './App.css';
 
 function App() {
