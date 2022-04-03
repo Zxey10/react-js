@@ -1,11 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 
 import classes from './AddMovie.module.css';
 
 function AddMovie(props) {
+
+
   const titleRef = useRef('');
   const openingTextRef = useRef('');
   const releaseDateRef = useRef('');
+
+  
 
   function submitHandler(event) {
     event.preventDefault();
@@ -19,6 +23,7 @@ function AddMovie(props) {
     };
 
     props.onAddMovie(movie);
+
   }
 
   return (

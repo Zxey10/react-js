@@ -9,13 +9,15 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const url = 'https://react-test-242e7-default-rtdb.firebaseio.com/movies.json'
+
   const fetchMovies = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const res = await fetch("https://swapi.dev/api/films/");
-      //!https://react-test-242e7-default-rtdb.firebaseio.com/
+      const res = await fetch(url);
+      //!https://react-test-242e7-default-rtdb.firebaseio.com/movies.json
 
       if (!res.ok) {
         throw new Error("Something went wrong!");
@@ -23,17 +25,27 @@ function App() {
 
       const data = await res.json();
 
-      const transformedMovies = data.results.map((movieData) => {
-        return {
-          id: movieData.episode_id,
-          title: movieData.title,
-          openingText: movieData.opening_crawl,
-          releaseDate: movieData.release_date,
-        };
-      });
-      setMovies((prevMovies) => {
-        return [...prevMovies, ...transformedMovies];
-      });
+      const loadedMovies = [];
+
+      for(const key in data){
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate
+        })
+      }
+
+      // const transformedMovies = data.results.map((movieData) => {
+      //   return {
+      //     id: movieData.episode_id,
+      //     title: movieData.title,
+      //     openingText: movieData.opening_crawl,
+      //     releaseDate: movieData.release_date,
+      //   };
+      // });
+
+      setMovies(loadedMovies)
       setTimeout(() => {
         setIsLoading(false);
       }, 500);
@@ -42,6 +54,38 @@ function App() {
       setIsLoading(false);
     }
   },[]);
+
+  const addUser = async(data,url) => {
+    //const data = {titleRef,openingTextRef,releaseDateRef}
+    try {
+      const options = {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+      const res = await fetch(url,options);
+  
+      if(!res.ok){
+        throw new Error("Something went wrong")
+      }
+  
+      const json  = await res.json()
+      console.log(json);
+      setMovies(prevMovies => [...prevMovies,data])
+    } catch (error) {
+      console.log(error);
+    }
+
+  } 
+
+
+  function addMovieHandler(movie){
+    console.log(movie);
+    addUser(movie,url);
+  }
+
 
   useEffect(() => {
     fetchMovies();
@@ -56,7 +100,7 @@ function App() {
           <button onClick={fetchMovies}>Fetch Movies</button>
         </section>
         <section>
-          <AddMovie />
+          <AddMovie onAddMovie={addMovieHandler}/>
           {isLoading && <p>Movies are loading...</p>}
           {!isLoading && movies.length === 0 && <p>Found No Movies</p>}
           {!isLoading && movies.length > 0 && <MoviesList movies={movies} />}

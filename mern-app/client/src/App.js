@@ -6,21 +6,24 @@ import Navbar from './components/Navbar';
 import NotFound from './components/NotFound';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom';
+import UserProvider from './store/UserProvider';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <UserProvider>
+      <div className="App">
         <Router>
           <Navbar />
           <Routes>
-            <Route index path='/home' element={<Home />}/>
-            <Route path='/about' element={<About />}/>
+            <Route index path='/home' element={<Home />} />
+            <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
-            <Route path='*' element={<NotFound />}/>
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </Router>
-    </div>
+      </div>
+    </UserProvider>
   );
 }
 

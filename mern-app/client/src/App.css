@@ -4,8 +4,12 @@
 
 .App a{
   margin: 1rem;
+  color: white;
 }
 .App form{
   margin-top: 1rem;
   border: 1px solid chartreuse;
+}
+.App ul{
+  list-style: none;
 }
