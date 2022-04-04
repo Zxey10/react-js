@@ -49,6 +49,11 @@ app.post('/home',async(req,res) => {
     }
 })
 
+app.get('/users',async(req,res) => {
+    const users = await User.find({}) 
+    res.json({users:users})
+})
+
 app.listen(port,() => {
     console.log(`Server running on ${port}`);
 })
