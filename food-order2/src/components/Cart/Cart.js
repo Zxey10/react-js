@@ -3,8 +3,12 @@ import styles from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import CartContext from "../../store/cart-context";
 import CartItem from "./CartItem";
+import CartForm from './CartForm'
+
 
 export default function Cart(props) {
+
+
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItem = cartCtx.items.length > 0;
@@ -45,6 +49,7 @@ export default function Cart(props) {
         </button>
         {hasItem && <button onClick={orderFood} className={styles.button}>Order</button>}
       </div>
+      <CartForm />
     </Modal>
   );
 }

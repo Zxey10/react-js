@@ -1,0 +1,39 @@
+
+form div{
+    display: flex;
+    flex-direction: column;
+}
+
+.name{
+    margin: .25rem;
+}
+
+.street{
+    margin: .25rem;
+}
+
+.postCode{
+    margin: .25rem;
+}
+
+.city{
+    margin: .25rem;
+}
+
+.invalid{
+    color: red;
+}
+.btn{
+    margin-top: 1rem;
+    background-color: rgb(38, 38, 228);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+.btn:disabled{
+    background-color: gray;
+    border: none;
+    cursor: not-allowed;
+}
