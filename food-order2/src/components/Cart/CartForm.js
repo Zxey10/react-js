@@ -1,13 +1,13 @@
-import React ,{ useContext, useEffect } from "react";
+import React ,{ useContext, useState } from "react";
 import Card from "../UI/Card";
 import styles from "./CartForm.module.css";
 import useInput from "../../hooks/use-input";
 import CartContext from "../../store/cart-context";
 import useHttp from "../../hooks/use-http";
 
-export default function CartForm() {
+export default function CartForm(props) {
 
-  const cartCtx = useContext(CartContext)  
+  const cartCtx = useContext(CartContext) 
 
   const {
     enteredValue: nameValue,
@@ -57,15 +57,37 @@ export default function CartForm() {
     sendRequest: sendPostRequest      
   } = useHttp(applyData);
 
-
-
   function formSubmitHandler(e) {
     e.preventDefault();
-
 
     if(!formValid){
         return;
     }
+
+    let reqConfig = {
+      url:'https://react-test-242e7-default-rtdb.firebaseio.com/orders.json',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        order:{
+          nameValue,
+          cityValue,
+          postalCodeValue,
+          streetValue,
+          meal_info:{
+            meal_list: cartCtx.items,
+            price: cartCtx.totalAmount
+          }
+        }
+      }
+    }
+
+    sendPostRequest(reqConfig)
+    cartCtx.sendOrder()
+    cartCtx.finishOrder()
+    props.onFormSubmited()
 
     resetName();
     resetStreet();
@@ -82,9 +104,9 @@ export default function CartForm() {
 
   const isDisabled = (cartCtx.items.length === 0) || !formValid
 
-  return (
-    <Card>
-      <form onSubmit={formSubmitHandler}>
+  const content = (
+    <Card className={styles.formCard}>
+      <form className={styles.form} onSubmit={formSubmitHandler}>
         <div className={nameClasess}>
           <label htmlFor="name">Your Name</label>
           <input type="text" autoComplete="off" name="name" id="name" value={nameValue} onChange={nameChangeHandler} onBlur={nameBlurHandler} />
@@ -108,8 +130,23 @@ export default function CartForm() {
           <input type="text" autoComplete="off" id="city" name="city" value={cityValue} onChange={cityChangeHandler} onBlur={cityBlurHandler} />
           {cityIsInvalid && <p className={styles.invalid}>City is invalid</p>}
         </div>
-        <button type="submit" className={styles.btn} disabled={isDisabled}>Submit</button>
+        <button type="submit" className={styles.btn} disabled={isDisabled}>Order</button>
       </form>
     </Card>
   );
+
+  if(isLoading){
+    return (
+      <Card>
+         <p>Loading ...</p>
+      </Card>
+    )
+  }else if(reqHasError){
+    <Card>
+      <p>{reqHasError}</p>
+    </Card>
+  }else{
+    return content
+  } 
+
 }

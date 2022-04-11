@@ -1,5 +1,8 @@
+.form{
+    margin: 0;
+}
 
-form div{
+.form div{
     display: flex;
     flex-direction: column;
 }

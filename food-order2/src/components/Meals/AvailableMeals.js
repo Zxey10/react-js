@@ -26,15 +26,15 @@ export default function AvailableMeals() {
   const {
     isLoading,
     error: reqHasError,
-    sendRequest: sendPostRequest,
+    sendRequest: sendGetRequest,
   } = useHttp(applyData);
 
   useEffect(() => {
     const reqConfig = {
       url: "https://react-test-242e7-default-rtdb.firebaseio.com/meals.json",
     };
-    sendPostRequest(reqConfig);
-  }, [sendPostRequest]);
+    sendGetRequest(reqConfig);
+  }, [sendGetRequest]);
 
   const mealsList = meals.map((meal) => {
     return (

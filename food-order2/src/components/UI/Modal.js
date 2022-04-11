@@ -7,8 +7,10 @@ const BackDrop = (props) => {
 };
 
 const ModalOverlay = (props) => {
+
+    let classes = `${styles.modal}`;
     return (
-        <div className={styles.modal}>
+        <div className={classes}>
             <div className={styles.content}>
                 {props.children}
             </div>

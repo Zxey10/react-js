@@ -20,6 +20,12 @@
     z-index: 30;
     animation: slide-down 300ms ease-out forwards;
   }
+
+  .content{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
   
   @media (min-width: 768px) {
     .modal {

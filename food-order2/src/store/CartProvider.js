@@ -10,7 +10,8 @@ const defaultCartState = {
 const ACTIONS = {
     addItem : 'ADD_ITEM',
     removeItem : 'REMOVE_ITEM',
-    order: 'ORDER'
+    order: 'ORDER',
+    finishOrder: 'ORDER_DONE'
 }
 
 const cartReducer = (state,action) => {
@@ -63,7 +64,18 @@ const cartReducer = (state,action) => {
                 items: state.items,
                 totalAmount: state.totalAmount,
                 orders: state.orders + 1
-            }    
+            }
+        case ACTIONS.finishOrder:
+            const interval = setTimeout(() => {
+                console.log(`Order ${state.orders} Done`);
+            },5000)
+            //clearTimeout(interval)
+            console.log('Preparing Order');
+
+            return{
+                ...state,
+                orders: state.orders - 1
+            }        
         default:
             break;
     }
@@ -94,6 +106,12 @@ export default function CartProvider(props) {
           type: ACTIONS.order
       });
   }
+  
+  const finishOrder = () => {
+      dispatchCartAction({
+          type: 'ORDER_DONE'
+      })
+  }
 
   const cartContext = {
     items: cartState.items,
@@ -102,6 +120,7 @@ export default function CartProvider(props) {
     removeItem: removeItemHandler,
     orders: cartState.orders,
     sendOrder: sendOrderHandler,
+    finishOrder: finishOrder
   }  
 
   return (
