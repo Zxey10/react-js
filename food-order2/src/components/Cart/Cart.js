@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, Fragment } from "react";
+import React, { useContext, useState, useCallback, Fragment } from "react";
 import styles from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import CartContext from "../../store/cart-context";
@@ -35,32 +35,31 @@ export default function Cart(props) {
     />
   ));
 
-  function formSubmited() {
-    setIsSubmited(true)
+  const formSubmited = () => {
+    if(isMounted) setIsSubmited(true)
   }
+
+  const content = <Fragment>
+  <div>
+    <ul className={styles["cart-items"]}>{cartItems}</ul>
+    <div className={styles.total}>
+      <span>Total Amount</span>
+      <span>{totalAmount}</span>
+    </div>
+    <div className={styles.actions}>
+      <button className={styles["button--alt"]} onClick={props.onHideCart}>
+        Close
+      </button>
+      {/* {hasItem && <button onClick={orderFood} className={styles.button}>Order</button>} */}
+    </div>
+  </div>
+  { <CartForm onFormSubmited={formSubmited} />}
+</Fragment>
 
   return (
     <Modal onClose={props.onHideCart}>
-      {!isSubmited ? (
-        <Fragment>
-          <div>
-            <ul className={styles["cart-items"]}>{cartItems}</ul>
-            <div className={styles.total}>
-              <span>Total Amount</span>
-              <span>{totalAmount}</span>
-            </div>
-            <div className={styles.actions}>
-              <button className={styles["button--alt"]} onClick={props.onHideCart}>
-                Close
-              </button>
-              {/* {hasItem && <button onClick={orderFood} className={styles.button}>Order</button>} */}
-            </div>
-          </div>
-          <CartForm onFormSubmited={formSubmited} />
-        </Fragment>
-      ) : (
-        <p>Order Sent</p>
-      )}
+      {!isSubmited && content}
+      { isSubmited && <p>Order Sent</p>}
     </Modal>
   )
 }

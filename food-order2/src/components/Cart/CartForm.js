@@ -86,8 +86,9 @@ export default function CartForm(props) {
 
     sendPostRequest(reqConfig)
     cartCtx.sendOrder()
-    cartCtx.finishOrder()
     props.onFormSubmited()
+    cartCtx.finishOrder()
+    cartCtx.clearCart()
 
     resetName();
     resetStreet();

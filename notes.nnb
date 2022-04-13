@@ -125,6 +125,20 @@
                 "//! useMemo\r\n\r\n//? App.js\r\n\r\nlet arr = useMemo(() => {\r\n    return [1,6,23,99,16];\r\n  },[])\r\n\r\nreturn (\r\n    <div className=\"app\">\r\n      <Demo show={isVisible}/>\r\n      <DemoList title={listTitle} items={arr} />\r\n      <Button onClick={allowHandler}>Allow Toggling</Button>\r\n      <Button onClick={clickHandler}>Toggle Paragraph</Button>\r\n      <Button onClick={changeTitleHandler}>Change Title</Button>\r\n    </div>\r\n  );\r\n\r\n  //? DemoList.js\r\n\r\n  import React, { useMemo } from 'react'\r\n\r\nfunction DemoList(props) {\r\n\r\n  const sortedArr = useMemo (() => {\r\n      console.log('Items Sorted');\r\n      return  props.items.sort((a,b) => a-b)  \r\n  },[props.items])\r\n\r\n  console.log('DemoListRunning');\r\n\r\n  return (\r\n    <div>\r\n      <p>{props.title}</p>\r\n      <ul>\r\n         {\r\n            sortedArr.map(item => {\r\n                return <li key={item}>{item}</li>\r\n            })\r\n         }\r\n      </ul>\r\n    </div>\r\n  )\r\n}\r\n\r\nexport default React.memo(DemoList)\r\n"
             ],
             "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! REDUX\r\n\r\n//? store/index.js\r\n\r\nimport { createStore } from 'redux'\r\n\r\nconst counterReducer = (state = {counter : 0}, action) => {\r\n    if(action.type === 'increment'){\r\n        return {\r\n            counter: state.counter + 1\r\n        }\r\n    }\r\n    if(action.type === 'decrement'){\r\n        return {\r\n            counter: state.counter - action.value\r\n        }\r\n    }\r\n    return state;\r\n}\r\n\r\nconst store = createStore(counterReducer);\r\n\r\nexport default store;\r\n\r\n// store.dispatch({type: 'increment'})\r\n// store.dispatch({type: 'decrement'})\r\n\r\n//? USAGE\r\n\r\nimport { useSelector, useDispatch } from 'react-redux'\r\nimport classes from './Counter.module.css';\r\n\r\nconst Counter = () => {\r\n\r\n  const counterValue = useSelector(state => state.counter);\r\n  const dispatch = useDispatch();\r\n\r\n  const toggleCounterHandler = () => {};\r\n\r\n  const incrementHandler = () =>{\r\n    dispatch({type: 'increment'})\r\n  }\r\n\r\n  const decrementHandler = () =>{\r\n    dispatch({type: 'decrement',value: 2}) //!PAYLOAD\r\n  }\r\n\r\n  return (\r\n    <main className={classes.counter}>\r\n      <h1>Redux Counter</h1>\r\n      <div className={classes.value}>{counterValue}</div>\r\n      <button onClick={toggleCounterHandler}>Toggle Counter</button>\r\n      <div>\r\n        <button onClick={incrementHandler}>Increment</button>\r\n        <button onClick={decrementHandler}>Decrement</button>\r\n      </div>\r\n    </main>\r\n  );\r\n};\r\n\r\nexport default Counter;\r\n\r\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
         }
     ]
 }

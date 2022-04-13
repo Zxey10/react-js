@@ -11,7 +11,8 @@ const ACTIONS = {
     addItem : 'ADD_ITEM',
     removeItem : 'REMOVE_ITEM',
     order: 'ORDER',
-    finishOrder: 'ORDER_DONE'
+    finishOrder: 'ORDER_DONE',
+    clearCart: 'CLEAR'
 }
 
 const cartReducer = (state,action) => {
@@ -75,7 +76,13 @@ const cartReducer = (state,action) => {
             return{
                 ...state,
                 orders: state.orders - 1
-            }        
+            }
+        case ACTIONS.clearCart:
+            return {
+                ...state,
+                items: [],
+                totalAmount: 0
+            }            
         default:
             break;
     }
@@ -113,6 +120,12 @@ export default function CartProvider(props) {
       })
   }
 
+  const cleanCart = () => {
+      dispatchCartAction({
+          type: 'CLEAR'
+      })
+  }
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
@@ -120,7 +133,8 @@ export default function CartProvider(props) {
     removeItem: removeItemHandler,
     orders: cartState.orders,
     sendOrder: sendOrderHandler,
-    finishOrder: finishOrder
+    finishOrder: finishOrder,
+    clearCart : cleanCart
   }  
 
   return (
