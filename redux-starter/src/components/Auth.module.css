@@ -27,3 +27,7 @@
   padding: 0.25rem;
   border: 1px solid #ccc;
 }
+
+button:disabled{
+  background-color: #616161;
+}
