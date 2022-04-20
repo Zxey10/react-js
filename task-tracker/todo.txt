@@ -1,0 +1,4 @@
+1. Check inputs
+2. useCheckbox hook
+3. Date
+4. Text Area for Journal

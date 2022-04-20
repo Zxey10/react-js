@@ -1,0 +1,16 @@
+.day{
+    margin: 1rem;
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+.complete label{
+    color: springgreen;
+}
+
+.incomplete label{
+    color: crimson;
+}

@@ -1,0 +1,15 @@
+.addBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.addBtn button{
+    background-color: #303030;
+    color:white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    border-radius:12px;
+    cursor: pointer;
+}

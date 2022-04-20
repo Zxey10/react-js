@@ -1,0 +1,12 @@
+.task{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+
+.task label{
+    font-weight: bold;
+    font-size: larger;
+    margin-right: 10px;
+}
