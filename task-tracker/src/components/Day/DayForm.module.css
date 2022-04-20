@@ -1,0 +1,43 @@
+div{
+    color: white;
+    text-align: center;
+}
+
+.form{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+.date{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem; 
+}
+
+.form button{
+    margin: 1rem;
+}
+
+.form label{
+    margin: 0.5rem;
+}
+
+.task{
+    display: flex;
+    align-items: center;
+}
+
+.btn{
+    background-color: chartreuse;
+}

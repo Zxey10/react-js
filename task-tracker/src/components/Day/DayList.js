@@ -1,25 +1,23 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
+import Modal from '../Modal/Modal'
 import { DayContext } from '../store/day-context'
 import Day from './Day'
 import styles from './DayList.module.css'
+import DayForm from './DayForm'
 
 export default function DayList() {
 
+  const [showOverlay,setShowOverlay] = useState(false)
 
   const dayCtx = useContext(DayContext);
 
-  function addNewDay() {
-    let newDay = {
-      id: Math.random(),
-      dayNumber: 1,
-      date: Date.now(),
-      tasks: [
-        { id: Math.random(), name: 't1', complete: false },
-        { id: Math.random(), name: 't2', complete: false }
-      ],
-      complete: false
-    }
-    dayCtx.addNewDay(newDay);
+
+  function showModal(){
+    setShowOverlay(true)
+  }
+
+  function closeModal(){
+    setShowOverlay(false)
   }
 
   let content;
@@ -35,7 +33,11 @@ export default function DayList() {
     <Fragment>
       {content}
       <div className={styles.addBtn}>
-        <button onClick={addNewDay}>+</button>
+        <button onClick={showModal}>+</button>
+        {showOverlay && 
+          <Modal onClose={closeModal}>
+              <DayForm />
+          </Modal>}
       </div>
     </Fragment>
   )

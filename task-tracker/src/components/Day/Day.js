@@ -3,13 +3,12 @@ import Card from '../UI/Card'
 import Task from '../Task/Task'
 import { formatDate } from '../Helpers/dateFormat'
 import styles from './Day.module.css'
+import TaskList from '../Task/TaskList'
 
 
 export default function Day({ day }) {
 
-    let content = day.tasks.map(task => (
-        <Task  key={task.id} task={task} />
-    ))
+    let isDayComplete = day.tasks.every(task => task.complete)
 
     let date = formatDate(day.date)
 
@@ -19,9 +18,9 @@ export default function Day({ day }) {
                 <h1>Day {day.dayNumber}</h1>
                 <h2>{date}</h2>
             </div>
-            {content}
-            <div className={day.complete ? styles.complete : styles.incomplete}>
-                <label htmlFor="day">{day.complete ? 'COMPLETED' : 'UNCOMPLETED'}</label>
+            <TaskList day={day}/>
+            <div className={isDayComplete ? styles.complete : styles.incomplete}>
+                <label htmlFor="day">{isDayComplete ? 'COMPLETED' : 'UNCOMPLETED'}</label>
             </div>
 
         </Card>

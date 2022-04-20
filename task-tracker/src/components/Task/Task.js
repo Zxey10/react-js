@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import Card from '../UI/Card'
 import styles from './Task.module.css'
+import { DayContext } from '../store/day-context'
 
 
-export default function Task({task}) {
+export default function Task({task,index}) {
 
-  function taskChangedHandler(e){
-      console.log('Input Changed');
+  const dayCtx = useContext(DayContext)
+
+  function taskChangedHandler(){
+    dayCtx.updateTask(task.id,index,task.complete)
   }
 
   return (
