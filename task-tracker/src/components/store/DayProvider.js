@@ -2,7 +2,8 @@ import React, {useReducer} from 'react'
 import { DayContext } from './day-context'
 
 const defaultState = {
-    days: []
+    days: [],
+    dayCounter: 0
 }
 
 const ACTIONS = {
@@ -17,6 +18,7 @@ const dayReducer = (state,action) => {
         updatedDays.push(action.day)
         console.log(updatedDays)
         return {
+            dayCounter: state.dayCounter + 1,
             days: updatedDays
         }
 
@@ -31,6 +33,7 @@ const dayReducer = (state,action) => {
                 updatedDaysTaks[action.index].tasks[index].complete = !action.complete
             }
             return{
+                dayCounter: state.dayCounter,
                 days: updatedDaysTaks
             }
         
@@ -62,7 +65,8 @@ export default function DayProvider(props) {
     const dayContext = {
         days: dayState.days,
         addNewDay: addTaskHandler,
-        updateTask: updateTask
+        updateTask: updateTask,
+        dayCounter: dayState.dayCounter
     }
 
     return (

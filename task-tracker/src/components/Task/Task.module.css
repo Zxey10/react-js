@@ -3,6 +3,7 @@
     justify-content: space-evenly;
     align-items: center;
     color: white;
+    border: 1px solid rgb(119, 0, 255);
 }
 
 .task label{
@@ -10,3 +11,16 @@
     font-size: larger;
     margin-right: 10px;
 }
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+

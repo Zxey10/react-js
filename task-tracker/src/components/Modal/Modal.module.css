@@ -25,6 +25,8 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    overflow-y: auto;
+    height: 70vh;
   }
   
   @media (min-width: 768px) {

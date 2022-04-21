@@ -2,16 +2,21 @@ import React, { useContext, useState, useRef } from "react";
 import styles from "./DayForm.module.css";
 import Button from "../UI/Button";
 import { DayContext } from "../store/day-context";
-import TaskList from "../Task/TaskList";
 
 export default function DayForm(props) {
 
-  const [tasks,setTasks] = useState([])
+  const [tasks, setTasks] = useState([
+    { id: Math.random(), name: "React", complete: false },
+    { id: Math.random(), name: "Read 30 min", complete: false },
+    { id: Math.random(), name: "Workout", complete: false },
+    { id: Math.random(), name: "NFP", complete: false },
+    { id: Math.random(), name: "Learn English", complete: false },
+    { id: Math.random(), name: "Podcast", complete: false }
+  ])
 
   const dayCtx = useContext(DayContext);
-  const [dayNumber, setDayNumber] = useState(1);
   const [taskValue, setTaskValue] = useState('')
-
+  const dateValue = useRef('')
 
   //! Render Tasks on Form
   //! ADD MORE TASKS
@@ -22,25 +27,24 @@ export default function DayForm(props) {
 
     let newDay = {
       id: Math.random(),
-      dayNumber: dayNumber,
-      date: Date.now(),
+      dayNumber: dayCtx.dayCounter + 1,
+      date: dateValue.current.value !== '' ? dateValue.current.value : Date.now(),
       tasks: [...tasks],
       complete: false,
     };
     dayCtx.addNewDay(newDay);
     props.onClose()
-    setDayNumber(prevDay => prevDay + 1);
     //! Add To Firebase
   }
 
-  function taskValueChangeHandler(e){
+  function taskValueChangeHandler(e) {
     setTaskValue(e.target.value)
   }
 
-  function addNewTaskToDay(){
-    if(taskValue.trim().length > 0){
-      setTasks(prevTasks => [...prevTasks,{id:Math.random(), name:taskValue, complete:false}])
-    }else{
+  function addNewTaskToDay() {
+    if (taskValue.trim().length > 0) {
+      setTasks(prevTasks => [...prevTasks, { id: Math.random(), name: taskValue, complete: false }])
+    } else {
       console.log("Input Invalid")
     }
     setTaskValue('')
@@ -52,12 +56,12 @@ export default function DayForm(props) {
       <form className={styles.form} onSubmit={addNewDay}>
         <div className={styles.date}>
           <label htmlFor="date">Date</label>
-          <input type="date" name="date" id="date" />
+          <input ref={dateValue} type="date" name="date" id="date" />
         </div>
         <div className={styles.date}>
           <label htmlFor="task">Task</label>
           <div className={styles.task}>
-            <input value={taskValue} type="text" name="task" id="task" onChange={taskValueChangeHandler}/>
+            <input value={taskValue} type="text" name="task" id="task" onChange={taskValueChangeHandler} />
             <Button className={styles.btn} onClick={addNewTaskToDay}>Add Task</Button>
             <ul className={styles.ul}>
               {tasks.map(task => (

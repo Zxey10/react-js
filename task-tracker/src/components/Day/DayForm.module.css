@@ -3,6 +3,10 @@ div{
     text-align: center;
 }
 
+.scroll{
+    overflow-y: scroll;
+}
+
 .form{
     color: white;
     display: flex;
