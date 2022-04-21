@@ -6,3 +6,7 @@
     border-radius: 12px;
     cursor: pointer;
 }
+
+.button:disabled{
+    background-color: gray;
+}

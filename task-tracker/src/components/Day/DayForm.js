@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import styles from "./DayForm.module.css";
 import Button from "../UI/Button";
 import { DayContext } from "../store/day-context";
@@ -6,29 +6,44 @@ import TaskList from "../Task/TaskList";
 
 export default function DayForm(props) {
 
+  const [tasks,setTasks] = useState([])
+
   const dayCtx = useContext(DayContext);
-  const [dayNumber,setDayNumber] = useState(1);  
+  const [dayNumber, setDayNumber] = useState(1);
+  const [taskValue, setTaskValue] = useState('')
+
 
   //! Render Tasks on Form
   //! ADD MORE TASKS
 
-  function addNewDay() {
+  function addNewDay(e) {
+
+    e.preventDefault()
+
     let newDay = {
       id: Math.random(),
       dayNumber: dayNumber,
       date: Date.now(),
-      tasks: [
-        { id: Math.random(), name: 't1', complete: false },
-        { id: Math.random(), name: 't2', complete: false },
-        { id: Math.random(), name: 't3', complete: false },
-        { id: Math.random(), name: 't4', complete: false },
-        { id: Math.random(), name: 't5', complete: false }
-      ],
-      complete: false
-    }
+      tasks: [...tasks],
+      complete: false,
+    };
     dayCtx.addNewDay(newDay);
+    props.onClose()
     setDayNumber(prevDay => prevDay + 1);
     //! Add To Firebase
+  }
+
+  function taskValueChangeHandler(e){
+    setTaskValue(e.target.value)
+  }
+
+  function addNewTaskToDay(){
+    if(taskValue.trim().length > 0){
+      setTasks(prevTasks => [...prevTasks,{id:Math.random(), name:taskValue, complete:false}])
+    }else{
+      console.log("Input Invalid")
+    }
+    setTaskValue('')
   }
 
   return (
@@ -42,8 +57,13 @@ export default function DayForm(props) {
         <div className={styles.date}>
           <label htmlFor="task">Task</label>
           <div className={styles.task}>
-            <input type="text" name="task" id="task" />
-            <Button className={styles.btn}>Add Task</Button>
+            <input value={taskValue} type="text" name="task" id="task" onChange={taskValueChangeHandler}/>
+            <Button className={styles.btn} onClick={addNewTaskToDay}>Add Task</Button>
+            <ul className={styles.ul}>
+              {tasks.map(task => (
+                <li key={task.id}>{task.name}</li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className={styles.description}>
@@ -56,7 +76,12 @@ export default function DayForm(props) {
             placeholder="Enter something here ..."
           ></textarea>
         </div>
-        <Button type="submit">Add New Day</Button>
+        <div>
+          <Button disabled={tasks.length === 0} type="submit">Add New Day</Button>
+          <Button type="button" onClick={props.onClose}>
+            Cancel
+          </Button>
+        </div>
       </form>
     </div>
   );

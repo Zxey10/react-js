@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import Modal from '../Modal/Modal'
 import { DayContext } from '../store/day-context'
 import Day from './Day'
@@ -10,6 +10,10 @@ export default function DayList() {
   const [showOverlay,setShowOverlay] = useState(false)
 
   const dayCtx = useContext(DayContext);
+  
+  useEffect(() => {
+    console.log(dayCtx.days)
+  },[dayCtx.days])
 
 
   function showModal(){
@@ -36,7 +40,7 @@ export default function DayList() {
         <button onClick={showModal}>+</button>
         {showOverlay && 
           <Modal onClose={closeModal}>
-              <DayForm />
+              <DayForm onClose={closeModal}/>
           </Modal>}
       </div>
     </Fragment>

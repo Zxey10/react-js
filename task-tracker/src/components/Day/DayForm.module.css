@@ -41,3 +41,11 @@ div{
 .btn{
     background-color: chartreuse;
 }
+
+.ul{
+    list-style: none;
+}
+
+.ul li{
+    color: white;
+}

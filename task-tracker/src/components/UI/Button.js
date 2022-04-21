@@ -6,6 +6,6 @@ export default function Button(props) {
   const classes = `${styles.button} ${props.className || ''}`  
 
   return (
-    <button type={props.type || 'button'} className={classes}>{props.children}</button>
+    <button disabled={props.disabled} type={props.type || 'button'} onClick={props.onClick} className={classes}>{props.children}</button>
   )
 }

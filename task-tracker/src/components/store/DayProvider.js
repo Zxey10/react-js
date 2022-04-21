@@ -14,7 +14,8 @@ const dayReducer = (state,action) => {
     switch(action.type){
         case ACTIONS.ADD:
         let updatedDays = [...state.days];
-        updatedDays.push(action.task)
+        updatedDays.push(action.day)
+        console.log(updatedDays)
         return {
             days: updatedDays
         }
@@ -42,10 +43,10 @@ export default function DayProvider(props) {
 
     const [dayState,dispatchDays] = useReducer(dayReducer,defaultState)
     
-    const addTaskHandler = (task) => {
+    const addTaskHandler = (day) => {
         dispatchDays({
             type: ACTIONS.ADD,
-            task: task
+            day: day
         })
     }
 
