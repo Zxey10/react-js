@@ -1,10 +1,10 @@
 .button{
-    background: darkorange;
     padding: 0.75rem 1rem;
     color: white;
     border: none;
     border-radius: 12px;
     cursor: pointer;
+    margin: 0.5rem;
 }
 
 .button:disabled{

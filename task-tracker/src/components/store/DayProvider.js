@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react'
+import React, { useReducer, useCallback } from 'react'
 import { DayContext } from './day-context'
 
 const defaultState = {
@@ -8,7 +8,8 @@ const defaultState = {
 
 const ACTIONS = {
     ADD: 'ADD_DAY',
-    UPDATE_TASK: 'UPDATE_TASK'
+    UPDATE_TASK: 'UPDATE_TASK',
+    UPDATE_COUNTER: 'UPDATE_COUNTER'
 }
 
 const dayReducer = (state,action) => {
@@ -36,7 +37,11 @@ const dayReducer = (state,action) => {
                 dayCounter: state.dayCounter,
                 days: updatedDaysTaks
             }
-        
+        case ACTIONS.UPDATE_COUNTER:
+            return{
+                ...state,
+                dayCounter: state.dayCounter+1
+            }
         default:
             return defaultState;    
     }
@@ -62,11 +67,18 @@ export default function DayProvider(props) {
         })
     }
 
+    const updateCounterHandler = () => {
+        dispatchDays({
+            type: ACTIONS.UPDATE_COUNTER
+        })
+    }
+
     const dayContext = {
         days: dayState.days,
         addNewDay: addTaskHandler,
         updateTask: updateTask,
-        dayCounter: dayState.dayCounter
+        dayCounter: dayState.dayCounter,
+        updateCounter: updateCounterHandler
     }
 
     return (

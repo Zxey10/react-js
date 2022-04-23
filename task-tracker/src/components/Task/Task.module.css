@@ -1,15 +1,25 @@
+.taskList{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 .task{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: baseline;
     align-items: center;
     color: white;
-    border: 1px solid rgb(119, 0, 255);
 }
 
 .task label{
     font-weight: bold;
     font-size: larger;
-    margin-right: 10px;
+    margin: 0.25rem;
+    margin-left: 0.6rem;
+}
+
+.input{
+    accent-color: springgreen;
 }
 
 table {
@@ -24,3 +34,6 @@ table {
     padding: 8px;
   }
 
+.checkBox{
+  border: 1px solid red;
+}

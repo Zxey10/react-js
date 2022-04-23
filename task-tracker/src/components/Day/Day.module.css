@@ -14,3 +14,14 @@
 .incomplete label{
     color: crimson;
 }
+.defaultBtn{
+    background-color: darkorange;
+}
+
+.editBtn{
+    background-color: coral;
+}
+
+.deleteBtn{
+    background-color: crimson;
+}

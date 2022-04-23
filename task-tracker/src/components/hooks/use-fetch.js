@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 export const useFetch = (transformData) => {
 
     const [error,setError] = useState(null)
     const [isLoading,setIsLoading] = useState(false);
 
-    const sendRequest = async(reqConfig) => {
-        isLoading(true)
+    const sendRequest = useCallback(async(reqConfig) => {
+        setIsLoading(true)
         setError(null)
         try {
             const res = await fetch(reqConfig.url,{
@@ -19,13 +19,13 @@ export const useFetch = (transformData) => {
     
             const json = await res.json();
 
-            //transformData(json);
+            transformData(json);
 
         } catch (error) {
             setError(error.message)
         }
         setIsLoading(false)
-    }
+    },[transformData])
 
 
     return {
