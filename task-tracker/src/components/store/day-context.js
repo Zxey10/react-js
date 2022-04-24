@@ -5,6 +5,8 @@ export const DayContext = React.createContext({
     addNewDay: (day) => {},
     updateTask: (task,index,complete) => {},
     dayCounter: 0,
-    updateCounter: () => {}
+    updateCounter: () => {},
+    getDays: (days) => {},
+    updateDay: () => {}
 
 })

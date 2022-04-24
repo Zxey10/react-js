@@ -55,6 +55,8 @@ export default function DayForm(props) {
 
     //! Update Day State
 
+    if(!hasError) props.updateDays(newDay) 
+
     props.onClose();
   }
 

@@ -10,6 +10,7 @@ export default function DayList() {
 
   const [showOverlay,setShowOverlay] = useState(false)
   const [days,setDays] = useState([])
+  const dayCtx = useContext(DayContext)
 
   const transformData = useCallback((data) => {
 
@@ -23,10 +24,15 @@ export default function DayList() {
         dayNumber: data[key].dayNumber,
         id: data[key].id,
         tasks: data[key].tasks,
-        index: i
+        index: i,
+        firebaseKey: key
       })
     }
     setDays(trasnformedData)
+    //dayCtx.getDays(trasnformedData)
+
+    //console.log(dayCtx.days)
+
     console.log(trasnformedData)
   },[])
 
@@ -56,6 +62,10 @@ export default function DayList() {
     setDays(filteredDays)
   }
 
+  function updateDays(newDay){
+    if(newDay) setDays(prevDays => [...prevDays,newDay])
+  }
+
   let content;
   if(days.length === 0){
     content = <p style={{color:"white",textAlign: "center",margin: "1rem"}}>Add a day</p>
@@ -76,7 +86,7 @@ export default function DayList() {
         <button onClick={showModal}>+</button>
         {showOverlay && 
           <Modal onClose={closeModal}>
-              <DayForm dayIndex={days.length > 0 ? days[days.length-1].dayNumber : 0} onClose={closeModal}/>
+              <DayForm updateDays={updateDays} dayIndex={days.length > 0 ? days[days.length-1].dayNumber : 0} onClose={closeModal}/>
           </Modal>}
       </div>
     </Fragment>

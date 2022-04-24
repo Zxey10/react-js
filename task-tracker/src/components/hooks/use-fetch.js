@@ -6,6 +6,7 @@ export const useFetch = (transformData) => {
     const [isLoading,setIsLoading] = useState(false);
 
     const sendRequest = useCallback(async(reqConfig) => {
+        console.log('Req ++')
         setIsLoading(true)
         setError(null)
         try {

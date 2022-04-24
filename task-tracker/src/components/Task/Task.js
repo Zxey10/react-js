@@ -1,13 +1,34 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useCallback, useContext } from "react";
 import Card from "../UI/Card";
 import styles from "./Task.module.css";
 import { DayContext } from "../store/day-context";
+import { useFetch } from "../hooks/use-fetch";
 
-export default function Task({ task, index }) {
-  const dayCtx = useContext(DayContext);
+export default function Task({ task, dayKey, index, day }) {
+
+  const transformData = useCallback((data) => {
+    console.log(data)
+  },[])
+
+  const dayCtx = useContext(DayContext)
+
+  const { isLoading,sendRequest: sendPatchReq, error: hasError } = useFetch(transformData);
 
   function taskChangedHandler() {
     //dayCtx.updateTask(task.id, index, task.complete);
+    const reqConfig = {
+      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/${index}/.json`,
+      method:'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {complete: true}
+    }
+
+
+    //dayCtx.updateTask(task.id, index, task.complete);
+    sendPatchReq(reqConfig)
+    
   }
 
   return (
