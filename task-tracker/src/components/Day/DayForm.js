@@ -23,6 +23,7 @@ export default function DayForm(props) {
   const dayCtx = useContext(DayContext);
   const [taskValue, setTaskValue] = useState("");
   const dateValue = useRef("");
+  const descriptionValue = useRef('')
 
   
 
@@ -38,6 +39,7 @@ export default function DayForm(props) {
       date: dateValue.current.value !== "" ? dateValue.current.value : Date.now(),
       tasks: [...tasks],
       complete: false,
+      description: descriptionValue.current.value
     };
     //dayCtx.addNewDay(newDay);
     dayCtx.updateCounter();
@@ -56,6 +58,9 @@ export default function DayForm(props) {
     //! Update Day State
 
     if(!hasError) props.updateDays(newDay) 
+
+    dateValue.current.value = null;
+    descriptionValue.current.value = null;
 
     props.onClose();
   }
@@ -112,6 +117,7 @@ export default function DayForm(props) {
           <div className={styles.description}>
             <label htmlFor="description">Description</label>
             <textarea
+              ref={descriptionValue}
               name="description"
               id="description"
               cols="30"

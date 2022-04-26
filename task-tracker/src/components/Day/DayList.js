@@ -25,7 +25,8 @@ export default function DayList() {
         id: data[key].id,
         tasks: data[key].tasks,
         index: i,
-        firebaseKey: key
+        firebaseKey: key,
+        description: data[key].description
       })
     }
     setDays(trasnformedData)

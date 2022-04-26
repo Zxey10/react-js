@@ -25,3 +25,13 @@
 .deleteBtn{
     background-color: crimson;
 }
+
+.info{
+    margin-top: 0.5rem;
+    border: 1px solid rebeccapurple;
+    max-width: 250px;
+}
+
+.info p{
+   word-wrap: break-word;
+}

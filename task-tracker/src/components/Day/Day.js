@@ -1,43 +1,105 @@
-import React from 'react'
-import Card from '../UI/Card'
-import { formatDate } from '../Helpers/dateFormat'
-import styles from './Day.module.css'
-import TaskList from '../Task/TaskList'
-import Button from '../UI/Button'
-import { InfoCircle, Pencil, XCircle } from 'react-bootstrap-icons'
-
+import React, { useCallback, useState } from "react";
+import Card from "../UI/Card";
+import { formatDate } from "../Helpers/dateFormat";
+import styles from "./Day.module.css";
+import TaskList from "../Task/TaskList";
+import Button from "../UI/Button";
+import { InfoCircle, Pencil, XCircle } from "react-bootstrap-icons";
+import { useFetch } from "../hooks/use-fetch";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ReactDOM from "react-dom";
 
 export default function Day({ day, removeDay }) {
 
-    let isDayComplete = day.tasks.every(task => task.complete)
+  const [showInfo,setShowInfo] = useState(false)  
 
-    let date = formatDate(day.date)
+  const notify = () => {
+    //toast("Default Message");
 
-    function showDayInfo(){
-        
-    }
+    toast.success("Day Deleted!", {
+      icon: "🌞",
+      position: "bottom-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+      progress: undefined,
+    });
+  };
 
-    function editDay(){
-        
-    }
+  const transformData = useCallback((data) => {
+    console.log("Day Deleted");
+  }, []);
 
-    function deleteDay(){
-        removeDay(day)
-    }
+  const {
+    isLoading,
+    error: hasError,
+    sendRequest: sendDeleteRequest,
+  } = useFetch(transformData);
 
-    return (
-        <Card className={styles.day}>
-            <div>
-                <h1>Day {day.dayNumber}</h1>
-                <h2>{date}</h2>
-                <Button className={styles.defaultBtn} onClick={showDayInfo}><InfoCircle /> Info</Button>
-                <Button className={styles.editBtn} onClick={editDay}><Pencil /> Edit</Button>
-                <Button className={styles.deleteBtn} onClick={deleteDay}><XCircle /> Delete</Button>
-            </div>
-            <TaskList day={day}/>
-            <div className={isDayComplete ? styles.complete : styles.incomplete}>
-                <label htmlFor="day">{isDayComplete ? 'COMPLETED' : 'UNCOMPLETED'}</label>
-            </div>
-        </Card>
-    )
+  let isDayComplete = day.tasks.every((task) => task.complete);
+
+  let date = formatDate(day.date);
+
+  function showDayInfo() {
+    setShowInfo(prev => !prev)
+  }
+
+  function editDay() {
+
+  }
+
+  function deleteDay() {
+    const reqConfig = {
+      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${day.firebaseKey}/.json`,
+      method: "DELETE",
+    };
+    sendDeleteRequest(reqConfig);
+    removeDay(day);
+    notify();
+  }
+
+  return (
+    <Card className={styles.day}>
+      <div>
+        <h1>Day {day.dayNumber}</h1>
+        <h2>{date}</h2>
+        <Button className={styles.defaultBtn} onClick={showDayInfo}>
+          <InfoCircle /> Info
+        </Button>
+        <Button className={styles.editBtn} onClick={editDay}>
+          <Pencil /> Edit
+        </Button>
+        {ReactDOM.createPortal(
+          <ToastContainer
+            position="bottom-center"
+            autoClose={1000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />,
+          document.getElementById("root")
+        )}
+        <Button className={styles.deleteBtn} onClick={deleteDay}>
+          <XCircle /> Delete
+        </Button>
+       <div className={styles.info}>
+        {showInfo && <p>{day.description}</p>}
+       </div>
+      </div>
+      <TaskList day={day} />
+      <div className={isDayComplete ? styles.complete : styles.incomplete}>
+        <label htmlFor="day">
+          {isDayComplete ? "COMPLETED" : "UNCOMPLETED"}
+        </label>
+      </div>
+    </Card>
+  );
 }
