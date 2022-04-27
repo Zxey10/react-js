@@ -15,14 +15,14 @@ export default function Task({ task, dayKey, index, day }) {
   const { isLoading,sendRequest: sendPatchReq, error: hasError } = useFetch(transformData);
 
   function taskChangedHandler() {
-    //dayCtx.updateTask(task.id, index, task.complete);
+
     const reqConfig = {
       url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/${index}/.json`,
       method:'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: {complete: true}
+      body: {complete: !task.complete}
     }
 
 

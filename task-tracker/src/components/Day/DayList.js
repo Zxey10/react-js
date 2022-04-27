@@ -67,12 +67,23 @@ export default function DayList() {
     if(newDay) setDays(prevDays => [...prevDays,newDay])
   }
 
+  function removeTask(taskToRemove,index){
+    let daysRemovedTask = days[index-1].tasks.filter(task => taskToRemove.id !== task.id)
+    let newDay = [...days];
+    newDay[index-1].tasks = daysRemovedTask;
+    console.log(newDay[index-1])
+    setDays(newDay)
+    
+    //! Delete Req
+
+  }
+
   let content;
   if(days.length === 0){
     content = <p style={{color:"white",textAlign: "center",margin: "1rem"}}>Add a day</p>
   }else{
     content = days.map(day => (
-      <Day removeDay={removeDay} key={day.id} day={day} />
+      <Day removeTask={removeTask} removeDay={removeDay} key={day.id} day={day} />
     ))}
   
   if(hasError){

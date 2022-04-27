@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import Card from "../UI/Card";
 import { formatDate } from "../Helpers/dateFormat";
 import styles from "./Day.module.css";
@@ -9,10 +9,13 @@ import { useFetch } from "../hooks/use-fetch";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactDOM from "react-dom";
+import DayEditForm from "./DayEditForm";
 
-export default function Day({ day, removeDay }) {
+export default function Day({ day, removeDay, removeTask }) {
 
-  const [showInfo,setShowInfo] = useState(false)  
+  const [showInfo,setShowInfo] = useState(false)
+  const [showEdit,setShowEdit] = useState(false)  
+  const [dateValue,setDateValue] = useState('')  
 
   const notify = () => {
     //toast("Default Message");
@@ -49,7 +52,7 @@ export default function Day({ day, removeDay }) {
   }
 
   function editDay() {
-
+    setShowEdit(prev => !prev)
   }
 
   function deleteDay() {
@@ -62,16 +65,32 @@ export default function Day({ day, removeDay }) {
     notify();
   }
 
+  function dateChangeHandler(e){
+    setDateValue(e.target.value)
+  }
+
+  function cancelEdit(){
+    setDateValue('')
+    setShowEdit(false)
+  }
+
+  function deleteTask(task,index){
+    removeTask(task,index)
+  }
+
+  let formatedDate = formatDate(dateValue);
+
   return (
     <Card className={styles.day}>
       <div>
         <h1>Day {day.dayNumber}</h1>
         <h2>{date}</h2>
+        <h2>{dateValue !== '' ? formatedDate : date  }</h2>
         <Button className={styles.defaultBtn} onClick={showDayInfo}>
           <InfoCircle /> Info
         </Button>
-        <Button className={styles.editBtn} onClick={editDay}>
-          <Pencil /> Edit
+        <Button className={showEdit ? styles.save : styles.editBtn} onClick={editDay}>
+          <Pencil /> {showEdit ? 'Save' : 'Edit'}
         </Button>
         {ReactDOM.createPortal(
           <ToastContainer
@@ -93,13 +112,16 @@ export default function Day({ day, removeDay }) {
        <div className={styles.info}>
         {showInfo && <p>{day.description}</p>}
        </div>
+       {showEdit && <input value={dateValue} type="date" onChange={dateChangeHandler} />}
       </div>
-      <TaskList day={day} />
+      <TaskList removeTask={deleteTask} showEdit={showEdit} day={day} />
       <div className={isDayComplete ? styles.complete : styles.incomplete}>
         <label htmlFor="day">
           {isDayComplete ? "COMPLETED" : "UNCOMPLETED"}
         </label>
       </div>
+      {/* {showEdit && <DayEditForm />} */}
+      {showEdit && <Button onClick={cancelEdit} className={styles.cancel}>Cancel</Button>}
     </Card>
   );
 }

@@ -26,10 +26,18 @@
     background-color: crimson;
 }
 
+.save{
+    background-color: springgreen;
+}
+
+.cancel{
+    background-color: red;
+}
+
 .info{
     margin-top: 0.5rem;
-    border: 1px solid rebeccapurple;
     max-width: 250px;
+    background-color: wheat;
 }
 
 .info p{

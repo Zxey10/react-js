@@ -3,3 +3,5 @@
 3. Date
 4. Text Area for Journal
 5. Day Modal + From
+6. Add live input Change
+7. Work on Info Btn

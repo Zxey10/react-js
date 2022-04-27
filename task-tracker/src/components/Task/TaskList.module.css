@@ -1,0 +1,14 @@
+.taskList{
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.icon{
+    margin-right: 0.5rem;
+
+}
+.icon:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
