@@ -43,6 +43,14 @@ export default function Day({ day, removeDay, removeTask, updateTask }) {
     sendRequest: sendDeleteRequest,
   } = useFetch(transformData);
 
+  const transformDataDate = useCallback((data) => {
+    console.log("Date Changed");
+  }, []);
+
+  const {
+    sendRequest: sendPatchRequest,
+  } = useFetch(transformDataDate);
+
   let isDayComplete = day.tasks.every((task) => task.complete);
 
   let date = formatDate(day.date);
@@ -53,6 +61,7 @@ export default function Day({ day, removeDay, removeTask, updateTask }) {
 
   function editDay() {
     setShowEdit(prev => !prev)
+
   }
 
   function deleteDay() {
@@ -82,19 +91,36 @@ export default function Day({ day, removeDay, removeTask, updateTask }) {
     updateTask(complete,index,dayIndex)
   }
 
+  function changeDate(){
+    const reqConfig = {
+      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${day.firebaseKey}/.json`,
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {date: dateValue}
+    }
+    if(dateValue !== ''){
+      sendPatchRequest(reqConfig)
+    }else{
+      console.log("No Changes")
+    }
+
+    setShowEdit(false)
+  }
+
   let formatedDate = formatDate(dateValue);
 
   return (
     <Card className={styles.day}>
       <div>
         <h1>Day {day.dayNumber}</h1>
-        <h2>{date}</h2>
         <h2>{dateValue !== '' ? formatedDate : date  }</h2>
         <Button className={styles.defaultBtn} onClick={showDayInfo}>
           <InfoCircle /> Info
         </Button>
-        <Button className={showEdit ? styles.save : styles.editBtn} onClick={editDay}>
-          <Pencil /> {showEdit ? 'Save' : 'Edit'}
+        <Button className={styles.editBtn} onClick={editDay}>
+          <Pencil />  Edit
         </Button>
         {ReactDOM.createPortal(
           <ToastContainer
@@ -126,6 +152,7 @@ export default function Day({ day, removeDay, removeTask, updateTask }) {
       </div>
       {/* {showEdit && <DayEditForm />} */}
       {showEdit && <Button onClick={cancelEdit} className={styles.cancel}>Cancel</Button>}
+      {showEdit && <Button onClick={changeDate} className={styles.save}><Pencil /> Save</Button>}
     </Card>
   );
 }

@@ -7,7 +7,7 @@ import { XCircle } from "react-bootstrap-icons";
 export default function TaskList({ day, showEdit, removeTask, checkTask }) {
   
   function deleteTasks(index){
-    removeTask(day.tasks[index],day.index,day.firebaseKey,day.tasks[index].index)
+    removeTask(day.tasks[index],day.index,day.firebaseKey,index)
   }
 
   function updateTasks(isComplete,index,dayIndex){
@@ -20,8 +20,8 @@ export default function TaskList({ day, showEdit, removeTask, checkTask }) {
         return (
           <div key={Math.random()} className={styles.taskList}>
             {showEdit && <XCircle className={styles.icon} onClick={deleteTasks.bind(null,i)} color="red"/>}
-            <Task day={day} dayKey={day.firebaseKey} key={task.id} task={task} updateTasks={updateTasks}/>
-          </div>
+            <Task day={day} dayKey={day.firebaseKey} key={task.id} index={i} task={task} updateTasks={updateTasks}/>
+          </div>  
         )
       })}
     </div>

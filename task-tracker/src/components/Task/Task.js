@@ -17,7 +17,7 @@ export default function Task({ task, dayKey, index, day, updateTasks }) {
   function taskChangedHandler() {
 
     const reqConfig = {
-      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/${task.index}/.json`,
+      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/${index}/.json`,
       method:'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ export default function Task({ task, dayKey, index, day, updateTasks }) {
     }
     sendPatchReq(reqConfig)
 
-    updateTasks(reqConfig.body.complete,task.index,day.index)
+    updateTasks(reqConfig.body.complete,index,day.index)
 
   }
 

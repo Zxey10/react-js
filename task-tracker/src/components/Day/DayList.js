@@ -18,12 +18,6 @@ export default function DayList() {
     let i = 0;
 
     for(let key in data){
-      for(let taskKey in data[key].tasks){
-        console.log(taskKey)
-      }
-    }
-
-    for(let key in data){
       i++;
       trasnformedData.push({
         complete: data[key].complete,
@@ -89,13 +83,15 @@ export default function DayList() {
     newDay[index-1].tasks = [...daysRemovedTask];
     console.log(newDay)
     setDays(newDay)
-    
-
 
     //! Delete Req
     const reqConfig = {
-      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/${taskToRemove.index}/.json`,
-      method: "DELETE",
+      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/.json`,
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: newDay[index - 1].tasks
     };
     sendDeleteRequest(reqConfig);
 
