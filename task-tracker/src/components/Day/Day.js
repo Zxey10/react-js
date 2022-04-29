@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactDOM from "react-dom";
 import DayEditForm from "./DayEditForm";
 
-export default function Day({ day, removeDay, removeTask }) {
+export default function Day({ day, removeDay, removeTask, updateTask }) {
 
   const [showInfo,setShowInfo] = useState(false)
   const [showEdit,setShowEdit] = useState(false)  
@@ -74,8 +74,12 @@ export default function Day({ day, removeDay, removeTask }) {
     setShowEdit(false)
   }
 
-  function deleteTask(task,index){
-    removeTask(task,index)
+  function deleteTask(task,index,dayKey,taskIndex){
+    removeTask(task,index,dayKey,taskIndex)
+  }
+
+  function checkTask(complete,index,dayIndex){
+    updateTask(complete,index,dayIndex)
   }
 
   let formatedDate = formatDate(dateValue);
@@ -114,7 +118,7 @@ export default function Day({ day, removeDay, removeTask }) {
        </div>
        {showEdit && <input value={dateValue} type="date" onChange={dateChangeHandler} />}
       </div>
-      <TaskList removeTask={deleteTask} showEdit={showEdit} day={day} />
+      <TaskList checkTask={checkTask} removeTask={deleteTask} showEdit={showEdit} day={day} />
       <div className={isDayComplete ? styles.complete : styles.incomplete}>
         <label htmlFor="day">
           {isDayComplete ? "COMPLETED" : "UNCOMPLETED"}

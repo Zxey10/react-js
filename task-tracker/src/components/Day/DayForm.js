@@ -12,12 +12,12 @@ export default function DayForm(props) {
   } = useFetch((data) => console.log(data));
 
   const [tasks, setTasks] = useState([
-    { id: Math.random(), name: "React", complete: false },
-    { id: Math.random(), name: "Read 30 min", complete: false },
-    { id: Math.random(), name: "Workout", complete: false },
-    { id: Math.random(), name: "NFP", complete: false },
-    { id: Math.random(), name: "Learn English", complete: false },
-    { id: Math.random(), name: "Podcast", complete: false },
+    { id: Math.random(), name: "React", complete: false ,index:0},
+    { id: Math.random(), name: "Read 30 min", complete: false ,index:1},
+    { id: Math.random(), name: "Workout", complete: false ,index:2},
+    { id: Math.random(), name: "NFP", complete: false ,index:3},
+    { id: Math.random(), name: "Learn English", complete: false ,index:4},
+    { id: Math.random(), name: "Podcast", complete: false ,index:5},
   ]);
 
   const dayCtx = useContext(DayContext);
@@ -73,7 +73,7 @@ export default function DayForm(props) {
     if (taskValue.trim().length > 0) {
       setTasks((prevTasks) => [
         ...prevTasks,
-        { id: Math.random(), name: taskValue, complete: false },
+        { id: Math.random(), name: taskValue, complete: false, index: prevTasks[prevTasks.length-1].index + 1 || 0},
       ]);
     } else {
       console.log("Input Invalid");

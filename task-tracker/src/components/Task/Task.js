@@ -4,7 +4,7 @@ import styles from "./Task.module.css";
 import { DayContext } from "../store/day-context";
 import { useFetch } from "../hooks/use-fetch";
 
-export default function Task({ task, dayKey, index, day }) {
+export default function Task({ task, dayKey, index, day, updateTasks }) {
 
   const transformData = useCallback((data) => {
     console.log(data)
@@ -17,18 +17,17 @@ export default function Task({ task, dayKey, index, day }) {
   function taskChangedHandler() {
 
     const reqConfig = {
-      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/${index}/.json`,
+      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/${task.index}/.json`,
       method:'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
       body: {complete: !task.complete}
     }
-
-
-    //dayCtx.updateTask(task.id, index, task.complete);
     sendPatchReq(reqConfig)
-    
+
+    updateTasks(reqConfig.body.complete,task.index,day.index)
+
   }
 
   return (

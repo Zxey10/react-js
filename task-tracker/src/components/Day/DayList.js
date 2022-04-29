@@ -16,6 +16,13 @@ export default function DayList() {
 
     let trasnformedData = []
     let i = 0;
+
+    for(let key in data){
+      for(let taskKey in data[key].tasks){
+        console.log(taskKey)
+      }
+    }
+
     for(let key in data){
       i++;
       trasnformedData.push({
@@ -36,6 +43,14 @@ export default function DayList() {
 
     console.log(trasnformedData)
   },[])
+
+  const transformDataDel = useCallback((data) => {
+    console.log(data);
+  }, []);
+
+  const {
+    sendRequest: sendDeleteRequest,
+  } = useFetch(transformDataDel);
 
   const {
     isLoading,
@@ -67,15 +82,29 @@ export default function DayList() {
     if(newDay) setDays(prevDays => [...prevDays,newDay])
   }
 
-  function removeTask(taskToRemove,index){
+  function removeTask(taskToRemove,index,dayKey,taskIndex){
+    console.log(days[index-1])
     let daysRemovedTask = days[index-1].tasks.filter(task => taskToRemove.id !== task.id)
     let newDay = [...days];
-    newDay[index-1].tasks = daysRemovedTask;
-    console.log(newDay[index-1])
+    newDay[index-1].tasks = [...daysRemovedTask];
+    console.log(newDay)
     setDays(newDay)
     
-    //! Delete Req
 
+
+    //! Delete Req
+    const reqConfig = {
+      url: `https://task-tracker-28e35-default-rtdb.europe-west1.firebasedatabase.app/days/${dayKey}/tasks/${taskToRemove.index}/.json`,
+      method: "DELETE",
+    };
+    sendDeleteRequest(reqConfig);
+
+  }
+
+  function updateTask(complete,taskIndex,dayIndex){
+    let updatedDaysTaks = [...days];
+    updatedDaysTaks[dayIndex - 1].tasks[taskIndex].complete = complete;
+    setDays(updatedDaysTaks)
   }
 
   let content;
@@ -83,7 +112,7 @@ export default function DayList() {
     content = <p style={{color:"white",textAlign: "center",margin: "1rem"}}>Add a day</p>
   }else{
     content = days.map(day => (
-      <Day removeTask={removeTask} removeDay={removeDay} key={day.id} day={day} />
+      <Day updateTask={updateTask} removeTask={removeTask} removeDay={removeDay} key={day.id} day={day} />
     ))}
   
   if(hasError){
