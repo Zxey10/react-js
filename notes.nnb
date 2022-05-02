@@ -136,7 +136,21 @@
         {
             "language": "javascript",
             "source": [
-                ""
+                "//! Redux Slice\r\n\r\nimport { createSlice } from \"@reduxjs/toolkit\";\r\n\r\nconst initialAuthState = {\r\n    isAuthenticated: false\r\n}\r\n\r\nconst authSlice = createSlice({\r\n    name: 'auth',\r\n    initialState: initialAuthState,\r\n    reducers: {\r\n        login(state){\r\n            state.isAuthenticated = true;\r\n        },\r\n        logout(state){\r\n            state.isAuthenticated = false;\r\n        }\r\n    }\r\n})\r\n\r\nexport const authActions = authSlice.actions;\r\nexport default authSlice;"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! Combine Reducers\r\n\r\nimport { configureStore } from '@reduxjs/toolkit';\r\n\r\nimport authSlice from './auth';\r\nimport counterSlice from './counter';\r\n\r\nconst store = configureStore({\r\n    reducer: {counter: counterSlice.reducer, auth: authSlice.reducer}\r\n})\r\n\r\nexport default store;\r\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//! Use data\r\n\r\nimport classes from './Header.module.css';\r\nimport { useSelector, useDispatch } from 'react-redux';\r\nimport { authActions } from '../store/auth';\r\n\r\nconst Header = () => {\r\n\r\n  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)\r\n  const dispatch = useDispatch();\r\n\r\n  function logoutHandler(){\r\n    dispatch(authActions.logout())\r\n  }\r\n\r\n  return (\r\n    <header className={classes.header}>\r\n      <h1>Redux Auth</h1>\r\n      <nav>\r\n        <ul>\r\n          <li>\r\n            <a href='/'>My Products</a>\r\n          </li>\r\n          <li>\r\n            <a href='/'>My Sales</a>\r\n          </li>\r\n          {isAuthenticated && <li>\r\n            <button onClick={logoutHandler}>Logout</button>\r\n          </li>}\r\n        </ul>\r\n      </nav>\r\n    </header>\r\n  );\r\n};\r\n\r\nexport default Header;\r\n"
             ],
             "outputs": []
         }
