@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Card from '../UI/Card'
 import Button from '../UI/Button'
 import styles from './Product.module.scss'
+import { useDispatch } from 'react-redux'
+import { cartActions } from '../store/cart'
+import { PRODUCTS } from '../data/products'
 
 export default function Product() {
+
+  const dispacthItems = useDispatch()
+
+  function addToCartHandler(product) {
+    dispacthItems(cartActions.addToCart({item: product}))
+  }
+
   return (
-    <Card className={styles.product}>
-      <h2>Test</h2>
-      <span>$6.00</span>
-      <p>This is a first product</p>
-      <Button>Add to Cart</Button>
-    </Card>
+    <Fragment>
+      {PRODUCTS.map(product => (
+        <Card key={Math.random()} className={styles.product}>
+          <h2>{product.name}</h2>
+          <span>${product.price}</span>
+          <p>{product.description}</p>
+          <Button onClick={addToCartHandler.bind(null,product)}>Add to Cart</Button>
+        </Card>
+      ))}
+    </Fragment>
   )
 }
