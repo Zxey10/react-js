@@ -12,6 +12,7 @@ export default function Product() {
 
   function addToCartHandler(product) {
     dispacthItems(cartActions.addToCart({item: product}))
+    
   }
 
   return (
