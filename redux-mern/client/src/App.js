@@ -4,6 +4,7 @@ import styles from "./App.module.scss";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Navbar from "./components/Navbar/Navbar";
 import CardBS from "./components/UI/Card";
+import MainPage from "./components/UI/MainPage";
 
 function App() {
   const containerClasses = `${styles.container}`;
@@ -12,13 +13,7 @@ function App() {
   return (
     <Fragment>
       <Navbar />
-    <Container fluid className={containerClasses}>
-      <Row>
-        <Col className={columnsClasses}>
-          <CardBS />
-        </Col>
-      </Row>
-    </Container>
+      <MainPage />
     </Fragment>
   );
 }

@@ -6,11 +6,11 @@ export default function Navbar() {
     <Fragment>
       <NavBar bg="dark" variant="dark" className='w-100'>
         <Container>
-          <NavBar.Brand href="#home">NavBar</NavBar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          <NavBar.Brand href="#home">Expense Tracker</NavBar.Brand>
+          <Nav className="ms-auto">
+            <Nav.Link className="active" href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Login</Nav.Link>
+            <Nav.Link href="#pricing">Register</Nav.Link>
           </Nav>
         </Container>
       </NavBar>
