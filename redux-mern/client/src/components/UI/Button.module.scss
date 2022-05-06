@@ -4,4 +4,11 @@
     background-color: #212121;
     border-radius: 12px;
     border: 1px solid white;
+    transition: 0.3s linear;
+    &:hover{
+        background-color: white;
+        color: black;
+        transform: translateY(-3px);
+        border: 1px solid black;
+    }
 }

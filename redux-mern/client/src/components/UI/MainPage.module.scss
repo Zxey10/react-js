@@ -13,7 +13,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 2;
     height: calc(100vh - 3.5rem);
+    &::after{
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top:0;
+        left: 0;
+        background-color: #212121;
+        opacity: 0.6;
+        z-index: -1;
+    }
     h1{
         font-weight: bold;
         // -webkit-text-stroke: 1px black;
@@ -21,6 +34,13 @@
     }
     button{
         margin: 5rem;
+        a{
+            text-decoration: none;
+            color: white;
+            &:hover{
+                color: black;
+            }
+        }
     }
-
+    
 }

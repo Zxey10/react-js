@@ -1,16 +1,18 @@
 import React, { Fragment } from "react";
 import { Navbar as NavBar, Container, Nav } from "react-bootstrap";
+import styles from './Navbar.module.scss';
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <Fragment>
-      <NavBar bg="dark" variant="dark" className='w-100'>
+      <NavBar variant="dark" className={styles.navbar}>
         <Container>
-          <NavBar.Brand href="#home">Expense Tracker</NavBar.Brand>
+          <NavBar.Brand href="/">Expense Tracker</NavBar.Brand>
           <Nav className="ms-auto">
-            <Nav.Link className="active" href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Login</Nav.Link>
-            <Nav.Link href="#pricing">Register</Nav.Link>
+            <Nav.Link className="active" href="/">Home</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/expenses">Register</Nav.Link>
           </Nav>
         </Container>
       </NavBar>

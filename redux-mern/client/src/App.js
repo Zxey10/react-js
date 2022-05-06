@@ -5,6 +5,9 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import Navbar from "./components/Navbar/Navbar";
 import CardBS from "./components/UI/Card";
 import MainPage from "./components/UI/MainPage";
+import {BrowserRouter, Routes, Route,} from "react-router-dom";
+import Login from "./components/Login/Login";
+import Expense from "./components/Expenses/Expense";
 
 function App() {
   const containerClasses = `${styles.container}`;
@@ -13,7 +16,13 @@ function App() {
   return (
     <Fragment>
       <Navbar />
-      <MainPage />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/expenses" element={<Expense />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </Fragment>
   );
 }
