@@ -11,8 +11,9 @@ export default function Navbar() {
           <NavBar.Brand href="/">Expense Tracker</NavBar.Brand>
           <Nav className="ms-auto">
             <Nav.Link className="active" href="/">Home</Nav.Link>
+            <Nav.Link href="/expenses">Expenses</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/expenses">Register</Nav.Link>
+            <Nav.Link href="/register">Register</Nav.Link>
           </Nav>
         </Container>
       </NavBar>

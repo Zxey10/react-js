@@ -24,7 +24,7 @@ export default function MainPage() {
             </Row>
             <Row>
                 <Col>
-                    <Button><Link to='/login'>Get Started</Link></Button>
+                <Link to='/login'><Button>Get Started</Button></Link>
                 </Col>
             </Row>
         </Container>
