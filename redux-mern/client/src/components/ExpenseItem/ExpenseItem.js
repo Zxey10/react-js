@@ -33,8 +33,9 @@ export default function ExpenseItem() {
                 random notes random notes random notes random notes random notes random notes random notes
                 random notes random notes
               </p>
-              <div className="d-flex justify-content-center align-items-center">
-              <button className={styles.edit}>Edit</button>
+              <div className="d-flex justify-content-around align-items-center">
+                <button className='btn btn-warning text-white col-2'>Edit</button>
+                <button className='btn btn-danger col-2'>Delete</button>
               </div>
             </div>
           </Col>

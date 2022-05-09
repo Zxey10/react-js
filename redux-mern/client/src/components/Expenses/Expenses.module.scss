@@ -1,8 +1,16 @@
 .expenses{
-    height: calc(100vh - 3.5rem);
+    height: 100%;
     background-color: #212121;
     .expenseList{
         color: white;
         font-size: 24px;
+    }
+    .expensesCards{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2rem;
+        flex-wrap: wrap;
+        flex-basis: 33%;
     }
 }
