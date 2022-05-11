@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialExpensesState = {
-    items: []
+    expenses: []
 }
 
 const expensesSlice = createSlice({
     name: 'expenses',
     initialState: initialExpensesState,
     reducers: {
-        add(state){
-
+        getExpenses(state, action){
+            state.expenses = action.payload.expenses
         }
     }
 })

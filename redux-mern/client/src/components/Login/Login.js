@@ -4,11 +4,14 @@ import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useInput from "../hooks/use-input";
 import { useNavigate } from 'react-router-dom'
+import { authActions } from "../store/auth";
+import { useDispatch } from 'react-redux'
 
 function Login() {
 
   const [formIsValid,setFormIsValid] = useState(false)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     enteredValue: emailValue,
@@ -39,6 +42,8 @@ function Login() {
   function handleFormSubmit(e) {
     e.preventDefault()
     if(!formIsValid) return;
+
+    dispatch(authActions.login())
 
     resetEmail()
     resetPassword()

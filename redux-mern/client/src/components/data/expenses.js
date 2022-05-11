@@ -2,6 +2,7 @@ export const EXPENSES = [
     {
         id: 1,
         title: 'Expense 1',
+        totalExpense: 123,
         date: Date.now(),
         notes: 'random notes random notes random notes random notes random notes random notes random notes random notes',
         items: [
@@ -30,6 +31,7 @@ export const EXPENSES = [
     {
         id: 2,
         title: 'Expense 2',
+        totalExpense: 123,
         date: Date.now(),
         notes: 'random notes random notes random notes random notes random notes random notes random notes random notes',
         items: [
@@ -57,6 +59,7 @@ export const EXPENSES = [
     },{
         id: 2,
         title: 'Expense 2',
+        totalExpense: 123,
         date: Date.now(),
         notes: 'random notes random notes random notes random notes random notes random notes random notes random notes',
         items: [
@@ -84,6 +87,7 @@ export const EXPENSES = [
     },{
         id: 2,
         title: 'Expense 2',
+        totalExpense: 123,
         date: Date.now(),
         notes: 'random notes random notes random notes random notes random notes random notes random notes random notes',
         items: [
@@ -112,6 +116,7 @@ export const EXPENSES = [
     {
         id: 2,
         title: 'Expense 2',
+        totalExpense: 123,
         date: Date.now(),
         notes: 'random notes random notes random notes random notes random notes random notes random notes random notes',
         items: [
@@ -140,6 +145,7 @@ export const EXPENSES = [
     {
         id: 2,
         title: 'Expense 2',
+        totalExpense: 123,
         date: Date.now(),
         notes: 'random notes random notes random notes random notes random notes random notes random notes random notes',
         items: [
@@ -168,6 +174,7 @@ export const EXPENSES = [
     {
         id: 2,
         title: 'Expense 2',
+        totalExpense: 123,
         date: Date.now(),
         notes: 'random notes random notes random notes random notes random notes random notes random notes random notes',
         items: [

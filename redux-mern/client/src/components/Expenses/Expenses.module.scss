@@ -1,9 +1,11 @@
 .expenses{
+    min-height: 100vh;
     height: 100%;
     background-color: #212121;
     .expenseList{
         color: white;
         font-size: 24px;
+        margin: 0 5rem;
     }
     .expensesCards{
         display: flex;
@@ -12,5 +14,16 @@
         padding: 2rem;
         flex-wrap: wrap;
         flex-basis: 33%;
+    }
+    .addBtn{
+        filter: contrast(150%);
+        width: 34px;
+        height: 34px;
+        transition: 0.5s;
+        margin: 0 5rem;
+        &:hover{
+            filter: contrast(300%);
+        }
+        
     }
 }

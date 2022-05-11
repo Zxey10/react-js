@@ -17,7 +17,7 @@ export default function ExpenseCard({expense}) {
         <h2>{date}</h2>
       </div>
       <div className={styles.amount}>
-        <h2>$36</h2>
+        <h2>${expense.totalExpense}</h2>
       </div>
       <div className={styles.btn}>
         <Link to='/expenseItem'><img src={arrow} alt="->" /></Link>
