@@ -1,13 +1,27 @@
-import React from 'react'
-import styles from './ItemList.module.scss'
+import React from "react";
+import styles from "./ItemList.module.scss";
+import { XCircle } from "react-bootstrap-icons";
 
+export default function ItemList({ expensesItems, onRemoveExpenseItem }) {
+  function removeExpenseItem(id) {
+    onRemoveExpenseItem(id);
+  }
 
-export default function ItemList({expensesItems}) {
   return (
-    <ul className={styles.itemList}>
-      {expensesItems.map(expense => {
-        return <li key={Math.random()}>{expense.name}</li>
+    <div className={styles.itemList}>
+      {expensesItems.map((expense) => {
+        return (
+          <div className="d-flex justify-content-baseline align-items-center" 
+          key={Math.random()}>
+            <XCircle
+              onClick={removeExpenseItem.bind(null, expense.id)}
+              className={styles.remove}
+              color="red"
+            />
+            <p className="text-white m-0 p-1"> ${expense.price} {expense.name}</p>
+          </div>
+        );
       })}
-    </ul>
-  )
+    </div>
+  );
 }

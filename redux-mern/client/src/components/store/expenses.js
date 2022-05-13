@@ -10,6 +10,9 @@ const expensesSlice = createSlice({
     reducers: {
         getExpenses(state, action){
             state.expenses = action.payload.expenses
+        },
+        addExpense(state, action){
+            state.expenses.push(action.payload.expense)
         }
     }
 })

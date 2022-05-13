@@ -1,6 +1,8 @@
 .itemList{
-    list-style: none;
     color: white;
-    padding: 1rem;
-   
+    width: 100%;
+   .remove{
+       margin-right: 0.5rem;
+       cursor: pointer;
+   }
 }
