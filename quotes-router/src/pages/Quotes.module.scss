@@ -1,0 +1,27 @@
+.quotes{
+    height: 100%;
+    background-color: #323232;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .quotesList{
+        margin: 1rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        button{
+            margin: 1rem;
+            background-color: aquamarine;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            align-self: flex-start;
+            font-weight: bold;
+            &:hover{
+                background-color: aqua;
+            }
+        }
+    }
+}

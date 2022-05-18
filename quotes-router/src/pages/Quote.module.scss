@@ -1,0 +1,38 @@
+.quote{
+    height: 100%;
+    background-color: cadetblue;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .card{
+        margin-top: 2rem;
+        padding: 5rem;
+        background-color: #212121;
+        color: white;
+        border-radius: 10px;
+        p{
+            text-align: end;
+        }
+    }
+    .comments{
+        margin: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        h3,h6{
+            margin: 1rem;
+        }
+    }
+    button{
+        margin-top: 1rem;
+        background-color: aquamarine;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        font-weight: bold;
+        &:hover{
+            background-color: aqua;
+        }
+    }
+}
