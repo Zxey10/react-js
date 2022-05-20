@@ -1,7 +1,7 @@
 import React ,{ useState, useRef } from 'react'
 import styles from './Quote.module.scss'
-import { useParams } from 'react-router-dom'
-import { QUOTES } from '../data/quotes';
+import { useParams, Routes, Route, Link, Outlet } from 'react-router-dom'
+import Comments from './Comments';
 
 export default function Quote() {
 
@@ -9,7 +9,6 @@ export default function Quote() {
   const text = useRef()  
   const params = useParams()
 
-  console.log(QUOTES[params.id - 1]) 
 
   function addCommment(){
       if(text.current.value.trim().length <= 0) return 
@@ -20,7 +19,6 @@ export default function Quote() {
     <div className={styles.quote}>
         <div className={styles.card}>
             <h1>This Works {params.id}</h1>
-            {/* <p>{QUOTES[params.id - 1].author}</p> */}
         </div>
 
         <div className={styles.comments}>
@@ -29,14 +27,10 @@ export default function Quote() {
             <textarea ref={text} name="comment" id="comment" cols="30" rows="10" />
             <button onClick={addCommment}>Add Comment</button>
         </div>
-
-        <div>
-            <ul>
-                {comments.map(comm => (
-                    <li key={comm.id}>{comm.text}</li>
-                ))}
-            </ul>
-        </div>
+        
+        <Link to={`/quotes/${params.id}/comments`}>To Comments</Link>
+        <Link to={`/quotes/${params.id}/edit`}>To Edit</Link>
+        <Outlet />
     </div>
   )
 }

@@ -24,6 +24,7 @@ export default function NewQuotes() {
       
       //SEND TO QUOTES
 
+      
       navigate('/quotes',{state: quote});  
   }  
 

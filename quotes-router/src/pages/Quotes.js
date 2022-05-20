@@ -7,14 +7,15 @@ export default function Quotes() {
   const [quotes,setQuotes] = useState([]);
 
   const  data = useLocation();
-    
+
   useEffect(() => {
     console.log(quotes);
   },[quotes])
 
   useEffect(() => {
+    if(data.state === null) return
     setQuotes(prev => [...prev,{...data.state}])
-  },[data.state])
+  },[data])
 
   return (
     <div className={styles.quotes}>
