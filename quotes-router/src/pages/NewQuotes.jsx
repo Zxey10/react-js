@@ -1,13 +1,23 @@
-import React, { useRef } from 'react'
+import React, { Fragment, useRef, useState, useEffect } from 'react'
 import styles from './NewQuotes.module.scss'
-import { useNavigate } from 'react-router-dom'
+import Prompt from '../components/Prompt'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export default function NewQuotes() {
 
   const authorRef = useRef('');
   const textRef = useRef('');  
+  const [isEntering,setIsEntering] = useState(false)
+  const [showPrompt,setShowPrompt] = useState(false)
+  const navigate = useNavigate();
+  const location = useLocation(); 
   
-  const navigate = useNavigate();  
+  useEffect(() => {
+    if(location.pathname !== '/quotes/new'){
+      setShowPrompt(true)
+    }
+  },[location])
+
 
   function addNewQuote(e){
       e.preventDefault();
@@ -28,9 +38,15 @@ export default function NewQuotes() {
       navigate('/quotes',{state: quote});  
   }  
 
+  function focusHandler(){
+    setIsEntering(true);
+  }
+
   return (
-    <div className={styles.newQuotes}>
-      <form onSubmit={addNewQuote} className={styles.form}>
+    <Fragment>
+      {showPrompt && <Prompt message={"Are you sure you want to exit?"} />}
+      <div className={styles.newQuotes}>
+      <form onFocus={focusHandler} onSubmit={addNewQuote} className={styles.form}>
           <div className={styles.author}>
               <label htmlFor="author">Author</label>
               <input ref={authorRef} type="text" id='author'/>
@@ -42,5 +58,6 @@ export default function NewQuotes() {
           <button type='submit'>Submit</button>
       </form>
     </div>
+    </Fragment>
   )
 }

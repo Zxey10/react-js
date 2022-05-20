@@ -2,27 +2,42 @@ import React, { useEffect, useState } from 'react'
 import styles from './Quotes.module.scss'
 import Card from '../UI/Card'
 import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
+const sortQuotes = (quotes, ascending) => {
+  return quotes.sort((quoteA, quoteB) => {
+    if (ascending) {
+      return quoteA.id > quoteB.id ? 1 : -1;
+    } else {
+      return quoteA.id < quoteB.id ? 1 : -1;
+    }
+  });
+};
 
 export default function Quotes() {
-  const [quotes,setQuotes] = useState([]);
+  const [quotes,setQuotes] = useState([
+    {id:1,text: "Random 1",author: " Alex"},
+    {id:2,text: "Random 2",author: " Jake"}
+  ]);
 
-  const  data = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search)
 
-  useEffect(() => {
-    console.log(quotes);
-  },[quotes])
+  const isSortingAscending = queryParams.get('sort') === 'asc'
 
-  useEffect(() => {
-    if(data.state === null) return
-    setQuotes(prev => [...prev,{...data.state}])
-  },[data])
+  const sortedQuotes = sortQuotes(quotes,isSortingAscending)
+
+  function changeSortingHandler(){
+    navigate('/quotes?sort=' + (isSortingAscending ? 'desc' : 'asc'),{replace:true})
+  }
 
   return (
     <div className={styles.quotes}>
       <div className={styles.quotesList}>
-      <button>Sort Ascending</button> 
+      <button onClick={changeSortingHandler}>Sort {isSortingAscending ? 'Descending' : 'Ascending'}</button> 
         {quotes.length === 0 && <p style={{color:'white'}}>No Quotes</p>} 
-        {quotes.map(quote => {
+        {sortedQuotes.map(quote => {
             return <Card key={Math.random()} quote={quote}/>
         })}
       </div>
