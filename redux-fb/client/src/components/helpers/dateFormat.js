@@ -11,3 +11,14 @@ export const formatDate = (date) => {
 
     return today1;
 }
+
+export const formatDateMonth = (date) => {
+    const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+    let d = new Date(date)
+    return {
+        day: d.getDay(),
+        month: monthNames[d.getMonth()],
+        year: d.getFullYear()
+    }
+    //"2022-04-30"
+}

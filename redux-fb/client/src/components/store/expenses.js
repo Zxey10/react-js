@@ -13,7 +13,7 @@ const expensesSlice = createSlice({
         },
         addExpense(state, action){
             state.expenses.push(action.payload.expense)
-        }
+        },
     }
 })
 

@@ -37,7 +37,7 @@ export default function ExpenseForm() {
     reset: resetPriceItem,
     handleChange: priceItemOnChange,
     handleBlur: priceItemOnBlur,
-  } = useInput((value) => value !== '');
+  } = useInput((value) => value > 0);
 
   const {
     enteredValue: expenseTitle,
@@ -66,13 +66,13 @@ export default function ExpenseForm() {
     let item = {
       id: Math.random(),
       name: expenseItem,
-      price: priceItem,
+      price: +priceItem,
     }
     setExpensesItems((prev) => [
       ...prev,
       item
     ]);
-    setTotalExpense(prev => prev + +item.price)
+    setTotalExpense(prev => prev + item.price)
     resetItem();
     resetPriceItem();
   }
@@ -87,7 +87,7 @@ export default function ExpenseForm() {
 
     const expense = {
       title: expenseTitle,
-      id: 1,
+      id: Math.random(),
       date: dateItem || Date.now(),
       items: expensesItems,
       notes: textareaValue,
@@ -100,7 +100,7 @@ export default function ExpenseForm() {
     resetDateItem();
     setTextAreaValue('')
 
-    navigate("/");
+    navigate("/expenses", {replace: true});
   }
 
   return (

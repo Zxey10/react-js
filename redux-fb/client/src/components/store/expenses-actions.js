@@ -12,7 +12,6 @@ export const fetchExpenses = () => {
     
             const json = await res.json();
 
-            console.log(json)
             let newExpenses = []
             
             for(let key in json){
@@ -22,7 +21,8 @@ export const fetchExpenses = () => {
                     items: json[key].items,
                     notes: json[key].notes,
                     title: json[key].title,
-                    totalExpense: json[key].totalExpense
+                    totalExpense: json[key].totalExpense,
+                    key
                 })
             }
 
@@ -56,7 +56,15 @@ export const createNewExpense = (expense) => {
             
             if(!res.ok) throw new Error('Post Req Failed')
             
-            dispatch(expenseActions.addExpense({expense}))
+            const json = await res.json()
+
+            const newExpense = {
+                ...expense,
+                key: json.name
+            }
+
+            dispatch(expenseActions.addExpense({expense: newExpense}))
+
 
             console.log('ExpenseAdded')
 

@@ -1,14 +1,16 @@
 import React ,{ useState, useRef } from 'react'
 import styles from './Quote.module.scss'
-import { useParams, Routes, Route, Link, Outlet } from 'react-router-dom'
+import { useParams, Routes, Route, Link, Outlet ,useMatch } from 'react-router-dom'
 import Comments from './Comments';
 
 export default function Quote() {
 
   const [comments,setComments] = useState([]);
-  const [text,setText] = useState()  
-  const params = useParams()
+  const [text,setText] = useState(); 
+  const params = useParams();
+  const matchUrl = useMatch('/quotes/:id');
 
+  console.log(matchUrl)
 
   function addCommment(){
       if(text.trim().length <= 0) return 
@@ -29,8 +31,8 @@ export default function Quote() {
             <button onClick={addCommment}>Add Comment</button>
         </div>
         
-        <Link to={`/quotes/${params.id}/comments`} state={{comments}}>To Comments</Link>
-        <Link to={`/quotes/${params.id}/edit`}>To Edit</Link>
+        <Link to={`${matchUrl.pathname}/comments`} state={{comments}}>To Comments</Link>
+        <Link to={`${matchUrl.pathname}/edit`}>To Edit</Link>
         <Outlet />
     </div>
   )

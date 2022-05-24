@@ -10,6 +10,7 @@ import ExpenseItem from "./components/ExpenseItem/ExpenseItem";
 import { useDispatch } from "react-redux";
 import { fetchExpenses } from "./components/store/expenses-actions";
 import ExpenseForm from "./components/ExpenseForm/ExpenseForm";
+import NotFound from "./pages/NotFound";
 
 function App() {
  
@@ -28,8 +29,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/expenses" element={<Expenses />} />
-          <Route path="/expenseItem" element={<ExpenseItem />} />
+          <Route path="/expenses/:expenseId" element={<ExpenseItem />} />
           <Route path="/newExpense" element={<ExpenseForm />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </Fragment>

@@ -29,7 +29,7 @@ export default function Quotes() {
   const sortedQuotes = sortQuotes(quotes,isSortingAscending)
 
   function changeSortingHandler(){
-    navigate('/quotes?sort=' + (isSortingAscending ? 'desc' : 'asc'),{replace:true})
+    navigate(`${location.pathname}?sort=${isSortingAscending ? 'desc' : 'asc'}`,{replace:true})
   }
 
   return (
