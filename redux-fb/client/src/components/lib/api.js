@@ -7,6 +7,7 @@ export const fetchExpenseById = async (expenseId) => {
     if (!res.ok) throw new Error("Get Expense Req Failed");
 
     const json = await res.json();
+    console.log(json)
 
     data = {
         idFB: expenseId,

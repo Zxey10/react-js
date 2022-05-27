@@ -13,17 +13,26 @@ export const fetchExpenses = () => {
             const json = await res.json();
 
             let newExpenses = []
+            let newItems = []
             
             for(let key in json){
+                for(let key1 in json[key].items){
+                    newItems.push({
+                        id: json[key].items[key1].id,
+                        price: json[key].items[key1].price,
+                        text: json[key].items[key1].text
+                    })
+                }
                 newExpenses.push({
                     date: json[key].date,
                     id: json[key].id,
-                    items: json[key].items,
                     notes: json[key].notes,
                     title: json[key].title,
+                    items: newItems,
                     totalExpense: json[key].totalExpense,
                     key
                 })
+                newItems = []
             }
 
             dispatch(expenseActions.getExpenses({
@@ -70,6 +79,34 @@ export const createNewExpense = (expense) => {
 
         } catch (error) {
             console.log(error)
+        }
+    }
+}
+
+export const addNewItem = (item, expenseId) => {
+    return async(dispatch) => {
+        const reqConfig = {
+            url: `https://expense-tracker-909a9-default-rtdb.europe-west1.firebasedatabase.app/Expenses/${expenseId}/items.json`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        }
+        try {
+            const res = await fetch(reqConfig.url,{
+                method: reqConfig.method,
+                headers: reqConfig.headers,
+                body: reqConfig.body
+            });
+
+            if(!res.ok) throw new Error('Failed to add item')
+
+            const json = await res.json();
+            console.log(json)
+
+        } catch (error) {
+            console.log(error.message)
         }
     }
 }
