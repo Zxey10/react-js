@@ -72,6 +72,22 @@
                 transform: scale(1.1);
             } 
         }
+        form{
+            div{
+                margin: 1rem 0;
+            }
+            .addBtn{
+                background-color: coral;
+                border: none;
+                padding: 1rem;
+                color: white;
+                margin-left: 10px;
+                border-radius: 10px;
+            }
+            .priceLabel{
+                left: revert;
+            }
+        }
     }
     .left{
         padding: 2rem;

@@ -16,6 +16,7 @@ export default function ExpenseItem() {
   const { expenseId } = params;
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
+  const [expensesItems, setExpensesItems] = useState([])
 
   const {
     enteredValue: expenseItem,
@@ -54,12 +55,25 @@ export default function ExpenseItem() {
     };
     setShowForm(prev => !prev)
     //dispatch(addNewItem(item, expenseId));
+    
+  }
+
+  let expenseValid = priceItemIsValid && expenseItemIsValid;
+
+  function addExpenseTask() {
+    if (!expenseValid) return
+    let expenseItm = {
+      id: Math.random(),
+      price: priceItem,
+      text: expenseItem
+    }
+    setExpensesItems(prevExpenses => [...prevExpenses, expenseItm])
     resetItem();
     resetPriceItem();
   }
 
-  function addExpenseTask(){
-
+  function submitExpenses() {
+    console.log("expenses Submited")
   }
 
   if (status === "pending") {
@@ -123,51 +137,58 @@ export default function ExpenseItem() {
                   </div>
                 </div>
                 {showForm && <Fragment>
-                <div className="form-floating d-flex justify-content-center align-items-start flex-column">
-                  <div className="form-floating d-flex justify-content-center align-items-center w-100">
-                    <input
-                      value={expenseItem}
-                      type="text"
-                      className="form-control me-2"
-                      id="floatingPassword"
-                      placeholder="Password"
-                      onChange={expenseItemOnChange}
-                      onBlur={expenseItemOnBlur}
-                    />
-                    <label htmlFor="floatingPassword">Items</label>
+                  <form onSubmit={submitExpenses}>
+                    <div className="form-floating d-flex justify-content-center align-items-start flex-column">
+                      <div className="form-floating d-flex justify-content-center align-items-center w-100">
+                        <input
+                          value={expenseItem}
+                          type="text"
+                          className="form-control me-2"
+                          id="floatingPassword"
+                          placeholder="Password"
+                          onChange={expenseItemOnChange}
+                          onBlur={expenseItemOnBlur}
+                        />
+                        <label htmlFor="floatingPassword" className="text-dark">Items</label>
 
-                    <input
-                      value={priceItem}
-                      type="number"
-                      className="form-control me-2"
-                      id="price"
-                      placeholder="Price"
-                      onChange={priceItemOnChange}
-                      onBlur={priceItemOnBlur}
-                    />
-                    <label className={styles.priceLabel} htmlFor="price">
-                      Price
-                    </label>
+                        <input
+                          value={priceItem}
+                          type="number"
+                          className="form-control me-2"
+                          id="price"
+                          placeholder="Price"
+                          onChange={priceItemOnChange}
+                          onBlur={priceItemOnBlur}
+                        />
+                        <label className={`${styles.priceLabel} text-dark`} htmlFor="price">
+                          Price
+                        </label>
 
-                    <button
-                      type="button"
-                      onClick={addExpenseTask}
-                      className={styles.addBtn}
-                    >
-                      +
-                    </button>
-                  </div>
-                  {expenseItemIsInvalid && (
-                    <p className="text-danger">Expense Invalid</p>
-                  )}
-                  {priceItemIsInvalid && (
-                    <p className="text-danger">Price Invalid</p>
-                  )}
-                </div>
+                        <button
+                          type="button"
+                          onClick={addExpenseTask}
+                          className={styles.addBtn}
+                        >
+                          +
+                        </button>
+                      </div>
+                      {expenseItemIsInvalid && (
+                        <p className="text-danger">Expense Invalid</p>
+                      )}
+                      {priceItemIsInvalid && (
+                        <p className="text-danger">Price Invalid</p>
+                      )}
+                    </div>
+                    <div>
+                      {expensesItems.map(expense => (
+                        <p key={Math.random()}>{expense.text}</p>
+                      ))}
+                    </div>
+                <button onClick={addItem}  className={styles.btn}>
+                  Add Expenses
+                </button>
+                  </form>
                 </Fragment>}
-                  <button onClick={addItem} className={styles.btn}>
-                    +
-                  </button>
               </div>
             </Col>
           </Row>
