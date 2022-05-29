@@ -9,6 +9,18 @@ export const fetchExpenseById = async (expenseId) => {
     const json = await res.json();
     console.log(json)
 
+    let transformedItems = []
+
+    for(let key in json.items){
+        transformedItems.push({
+            id: json.items[key].id,
+            price: json.items[key].price,
+            text: json.items[key].text
+        })
+    }
+
+    json.items = transformedItems;
+
     data = {
         idFB: expenseId,
         ...json,

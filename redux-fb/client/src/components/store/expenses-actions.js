@@ -83,10 +83,10 @@ export const createNewExpense = (expense) => {
     }
 }
 
-export const addNewItem = (item, expenseId) => {
+export const addNewItem = (item, expenseFBId, expenseId) => {
     return async(dispatch) => {
         const reqConfig = {
-            url: `https://expense-tracker-909a9-default-rtdb.europe-west1.firebasedatabase.app/Expenses/${expenseId}/items.json`,
+            url: `https://expense-tracker-909a9-default-rtdb.europe-west1.firebasedatabase.app/Expenses/${expenseFBId}/items/.json`,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -100,10 +100,14 @@ export const addNewItem = (item, expenseId) => {
                 body: reqConfig.body
             });
 
+            
             if(!res.ok) throw new Error('Failed to add item')
 
             const json = await res.json();
             console.log(json)
+
+            dispatch(expenseActions.addItem({item, expenseId}))
+
 
         } catch (error) {
             console.log(error.message)

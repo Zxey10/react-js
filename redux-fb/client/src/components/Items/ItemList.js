@@ -18,7 +18,7 @@ export default function ItemList({ expensesItems, onRemoveExpenseItem }) {
               className={styles.remove}
               color="red"
             />
-            <p className="text-white m-0 p-1"> ${expense.price} {expense.name}</p>
+            <p className="text-white m-0 p-1"> ${expense.price} {expense.text}</p>
           </div>
         );
       })}

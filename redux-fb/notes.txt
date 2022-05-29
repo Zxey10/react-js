@@ -1,4 +1,8 @@
-Fetch Expenses
+1. Total Expenses
+2. Style items list
+3. Work on Edit
+4. Delete Expense
+5. Delete Items
 
 
 //   let rows = [...Array(Math.ceil(EXPENSES.length / 3))]

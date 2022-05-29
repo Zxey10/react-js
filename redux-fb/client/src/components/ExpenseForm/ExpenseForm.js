@@ -8,18 +8,7 @@ import { useDispatch } from "react-redux";
 import useInput from "../hooks/use-input";
 
 export default function ExpenseForm() {
-  const [expensesItems, setExpensesItems] = useState([]);
-  const [textareaValue, setTextAreaValue] = useState('');
-  const [totalExpense, setTotalExpense] = useState(0);
-
-  const {
-    enteredValue: expenseItem,
-    isValid: expenseItemIsValid,
-    isInvalid: expenseItemIsInvalid,
-    reset: resetItem,
-    handleChange: expenseItemOnChange,
-    handleBlur: expenseItemOnBlur,
-  } = useInput((value) => value.trim().length > 1);
+  const [textareaValue, setTextAreaValue] = useState("");
 
   const {
     enteredValue: dateItem,
@@ -30,14 +19,6 @@ export default function ExpenseForm() {
     handleBlur: dateItemOnBlur,
   } = useInput((value) => value.trim().length > 0);
 
-  const {
-    enteredValue: priceItem,
-    isValid: priceItemIsValid,
-    isInvalid: priceItemIsInvalid,
-    reset: resetPriceItem,
-    handleChange: priceItemOnChange,
-    handleBlur: priceItemOnBlur,
-  } = useInput((value) => value > 0);
 
   const {
     enteredValue: expenseTitle,
@@ -48,59 +29,35 @@ export default function ExpenseForm() {
     handleBlur: expenseTitleOnBlur,
   } = useInput((value) => value.trim().length > 3);
 
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  function textAreaOnChange(e){
-    setTextAreaValue(e.target.value)
-  }
-
-  function removeExpenseItem(id) {
-    const updatedExpensesItems = expensesItems.filter((item) => item.id !== id);
-    setExpensesItems(updatedExpensesItems);
-  }
-
-  function addExpenseTask() {
-    if (expenseItemIsInvalid || priceItemIsInvalid) return;
-    let item = {
-      id: Math.random(),
-      name: expenseItem,
-      price: +priceItem,
-    }
-    setExpensesItems((prev) => [
-      ...prev,
-      item
-    ]);
-    setTotalExpense(prev => prev + item.price)
-    resetItem();
-    resetPriceItem();
+  function textAreaOnChange(e) {
+    setTextAreaValue(e.target.value);
   }
 
   let formIsValid = expenseTitleIsValid && dateItemIsValid;
-  
 
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    if(!formIsValid) return;
+    if (!formIsValid) return;
 
     const expense = {
       title: expenseTitle,
       id: Math.random(),
       date: dateItem || Date.now(),
-      items: expensesItems,
       notes: textareaValue,
-      totalExpense: totalExpense
+      items: []
     };
 
     dispatch(createNewExpense(expense));
-    
+
     resetExpenseTitle();
     resetDateItem();
-    setTextAreaValue('')
+    setTextAreaValue("");
 
-    navigate("/expenses", {replace: true});
+    navigate("/expenses", { replace: true });
   }
 
   return (
@@ -137,53 +94,8 @@ export default function ExpenseForm() {
             />
             <label htmlFor="floatingPassword">Date</label>
             {dateItemIsInvalid && <p className="text-danger">Invalid</p>}
-
           </div>
-          <div className="form-floating d-flex justify-content-center align-items-start flex-column">
-            <div className="form-floating d-flex justify-content-center align-items-center w-100">
-              <input
-                value={expenseItem}
-                type="text"
-                className="form-control me-2"
-                id="floatingPassword"
-                placeholder="Password"
-                onChange={expenseItemOnChange}
-                onBlur={expenseItemOnBlur}
-              />
-              <label htmlFor="floatingPassword">Items</label>
-              
-              <input
-                value={priceItem}
-                type="number"
-                className="form-control me-2"
-                id="price"
-                placeholder="Price"
-                onChange={priceItemOnChange}
-                onBlur={priceItemOnBlur}
-              />
-              <label className={styles.priceLabel} htmlFor="price">
-                Price
-              </label>
 
-              <button
-                type="button"
-                onClick={addExpenseTask}
-                className={styles.addBtn}
-              >
-                +
-              </button>
-
-             
-            </div>
-            {expenseItemIsInvalid && <p className="text-danger">Expense Invalid</p>}
-            {priceItemIsInvalid && <p className="text-danger">Price Invalid</p>}
-            {expensesItems.length > 0 && (
-              <ItemList
-                onRemoveExpenseItem={removeExpenseItem}
-                expensesItems={expensesItems}
-              />
-            )}
-          </div>
           <div className="form-floating form-group">
             <textarea
               value={textareaValue}

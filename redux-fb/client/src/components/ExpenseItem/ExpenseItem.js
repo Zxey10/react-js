@@ -10,13 +10,16 @@ import { formatDateMonth } from "../helpers/dateFormat";
 import { addNewItem } from "../store/expenses-actions";
 import { useDispatch } from "react-redux";
 import useInput from "../hooks/use-input";
+import ItemList from "../Items/ItemList";
+
+
 
 export default function ExpenseItem() {
   const params = useParams();
   const { expenseId } = params;
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
-  const [expensesItems, setExpensesItems] = useState([])
+  const [expensesItems, setExpensesItems] = useState([]);
 
   const {
     enteredValue: expenseItem,
@@ -47,33 +50,39 @@ export default function ExpenseItem() {
     fetchExpense(expenseId);
   }, [fetchExpense, expenseId]);
 
-  function addItem() {
-    let item = {
-      id: 12315,
-      text: "123",
-      price: 32,
-    };
-    setShowForm(prev => !prev)
-    //dispatch(addNewItem(item, expenseId));
-    
+  function showFormExpenseItem() {
+    setShowForm(true);
+  }
+
+  function removeExpenseItem(id) {
+    const updatedExpensesItems = expensesItems.filter((item) => item.id !== id);
+    setExpensesItems(updatedExpensesItems);
   }
 
   let expenseValid = priceItemIsValid && expenseItemIsValid;
 
-  function addExpenseTask() {
-    if (!expenseValid) return
+
+  function submitExpenses(e) {
+    e.preventDefault();
+    console.log("expenses Submited");
+    if (!expenseValid) return;
     let expenseItm = {
       id: Math.random(),
       price: priceItem,
-      text: expenseItem
-    }
-    setExpensesItems(prevExpenses => [...prevExpenses, expenseItm])
+      text: expenseItem,
+    };
+    setExpensesItems((prevExpenses) => [...prevExpenses, expenseItm]);
     resetItem();
     resetPriceItem();
-  }
+    setShowForm(false)
+    dispatch(addNewItem(expenseItm, expenseId, expenseData.id));
 
-  function submitExpenses() {
-    console.log("expenses Submited")
+
+    setTimeout(() => {
+      fetchExpense(expenseId);
+    },500)
+
+
   }
 
   if (status === "pending") {
@@ -84,15 +93,17 @@ export default function ExpenseItem() {
     return <p>{error}</p>;
   }
 
+
   if (status === "completed") {
     let { day, month, year } = formatDateMonth(expenseData.date);
-
+    const totalExpense = expenseData.items.reduce((acc,current) => acc + +current.price, 0)
+    console.log(totalExpense)
     return (
       <Container fluid className={styles.expenseItem}>
         <div className={styles.heading}>
           <h1>{expenseData.title}</h1>
           <h1>{params.expenseId}</h1>
-          <h1>Expenses ${expenseData.totalExpense}</h1>
+          <h1>Expenses ${totalExpense}</h1>
         </div>
         <Container className={styles.expense}>
           <Row className={styles.expenseCard}>
@@ -124,71 +135,85 @@ export default function ExpenseItem() {
               <div className={styles.right}>
                 <h3>Items</h3>
                 <div className={styles.itemList}>
-                  <div className={styles.items}>
-                    {/* {expenseData.items.map((item) => (
+                  <div className={`${styles.items} ${expenseData.items.length > 0 ? 'border border-white' : ''}`}>
+                    {expenseData.items.map((item) => (
                       <div
                         key={Math.random()}
                         className="d-flex justify-content-around align-items-center"
                       >
-                        <p>{item.name}</p>
+                        <p>{item.text}</p>
                         <p>${item.price}</p>
                       </div>
-                    ))} */}
+                    ))}
                   </div>
                 </div>
-                {showForm && <Fragment>
-                  <form onSubmit={submitExpenses}>
-                    <div className="form-floating d-flex justify-content-center align-items-start flex-column">
-                      <div className="form-floating d-flex justify-content-center align-items-center w-100">
-                        <input
-                          value={expenseItem}
-                          type="text"
-                          className="form-control me-2"
-                          id="floatingPassword"
-                          placeholder="Password"
-                          onChange={expenseItemOnChange}
-                          onBlur={expenseItemOnBlur}
-                        />
-                        <label htmlFor="floatingPassword" className="text-dark">Items</label>
+                {showForm && (
+                  <Fragment>
+                    <form id="expense-form" onSubmit={submitExpenses}>
+                      <div className="form-floating d-flex justify-content-center align-items-start flex-column">
+                        <div className="form-floating d-flex justify-content-center align-items-center w-100">
+                          <input
+                            value={expenseItem}
+                            type="text"
+                            className="form-control me-2"
+                            id="floatingPassword"
+                            placeholder="Password"
+                            onChange={expenseItemOnChange}
+                            onBlur={expenseItemOnBlur}
+                          />
+                          <label
+                            htmlFor="floatingPassword"
+                            className="text-dark"
+                          >
+                            Items
+                          </label>
 
-                        <input
-                          value={priceItem}
-                          type="number"
-                          className="form-control me-2"
-                          id="price"
-                          placeholder="Price"
-                          onChange={priceItemOnChange}
-                          onBlur={priceItemOnBlur}
-                        />
-                        <label className={`${styles.priceLabel} text-dark`} htmlFor="price">
-                          Price
-                        </label>
+                          <input
+                            value={priceItem}
+                            type="number"
+                            className="form-control me-2"
+                            id="price"
+                            placeholder="Price"
+                            onChange={priceItemOnChange}
+                            onBlur={priceItemOnBlur}
+                          />
+                          <label
+                            className={`${styles.priceLabel} text-dark`}
+                            htmlFor="price"
+                          >
+                            Price
+                          </label>
 
-                        <button
-                          type="button"
-                          onClick={addExpenseTask}
-                          className={styles.addBtn}
-                        >
-                          +
-                        </button>
+                          <button
+                            type="submit"
+                            className={styles.addBtn}
+                          >
+                            +
+                          </button>
+                        </div>
+                          <div className="w-100 d-flex justify-content-center align-items-center">
+                            <button type="button" onClick={() => {setShowForm(false)}} className="btn btn-danger">Cancel</button>
+                          </div>
+                        {expenseItemIsInvalid && (
+                          <p className="text-danger">Expense Invalid</p>
+                        )}
+                        {priceItemIsInvalid && (
+                          <p className="text-danger">Price Invalid</p>
+                        )}
                       </div>
-                      {expenseItemIsInvalid && (
-                        <p className="text-danger">Expense Invalid</p>
-                      )}
-                      {priceItemIsInvalid && (
-                        <p className="text-danger">Price Invalid</p>
-                      )}
-                    </div>
-                    <div>
-                      {expensesItems.map(expense => (
-                        <p key={Math.random()}>{expense.text}</p>
-                      ))}
-                    </div>
-                <button onClick={addItem}  className={styles.btn}>
-                  Add Expenses
-                </button>
-                  </form>
-                </Fragment>}
+                      {/* <ItemList expensesItems={expensesItems} onRemoveExpenseItem={removeExpenseItem} /> */}
+                    </form>
+                  </Fragment>
+                )}
+                {!showForm && (
+                  <button
+                    type="button"
+                    onClick={showFormExpenseItem}
+                    className={styles.btn}
+                  >
+                    Add Expenses
+                  </button>
+                )}
               </div>
             </Col>
           </Row>
