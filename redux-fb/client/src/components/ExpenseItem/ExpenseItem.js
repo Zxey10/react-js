@@ -61,8 +61,12 @@ export default function ExpenseItem() {
   }
 
   function deleteExpense(){
-    dispatch(deleteExpenseById(expenseId))
-    navigate('/expenses', { state:true,replace:true })
+    let ids = {
+      expenseFBId: expenseId,
+      expenseNormalId: expenseData.id
+    }
+    dispatch(deleteExpenseById(ids))
+    navigate('/expenses', { replace:true })
   }
 
   let expenseValid = priceItemIsValid && expenseItemIsValid;
