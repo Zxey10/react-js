@@ -4,6 +4,7 @@ import styles from './Navbar.module.scss';
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
 
@@ -14,7 +15,7 @@ export default function Navbar() {
     <Fragment>
       <NavBar variant="dark" className={styles.navbar}>
         <Container>
-          <NavBar.Brand to="/">Expense Tracker</NavBar.Brand>
+          <NavBar.Brand><Link to='/' className="text-white">Expense Tracker</Link></NavBar.Brand>
           <Nav className="ms-auto">
             <NavLink className={({isActive}) => isActive ? styles.active : ''} to="/">Home</NavLink>
             { isAuth && <NavLink className={({isActive}) => isActive ? styles.active : ''} to="/expenses">Expenses</NavLink>}

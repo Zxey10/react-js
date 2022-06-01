@@ -45,6 +45,8 @@ export const fetchExpenses = () => {
     }
 }
 
+
+
 export const createNewExpense = (expense) => {
     return async(dispatch) => {
         const reqConfig = {
@@ -112,5 +114,34 @@ export const addNewItem = (item, expenseFBId, expenseId) => {
         } catch (error) {
             console.log(error.message)
         }
+    }
+}
+
+export const deleteExpenseById = (expenseId) => {
+    return async(dispatch) => {
+        const reqConfig = {
+            url: `https://expense-tracker-909a9-default-rtdb.europe-west1.firebasedatabase.app/Expenses/${expenseId}/.json`,
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+            try {
+                const res = await fetch(reqConfig.url,{
+                    method: reqConfig.method,
+                    headers: reqConfig.headers,
+                    body: reqConfig.body
+                });
+    
+                if(!res.ok) throw new Error('Failed to add item')
+
+               
+                dispatch(expenseActions.deleteExpense({expenseId}))
+                dispatch(fetchExpenses())
+               
+    
+            } catch (error) {
+                console.log(error.message)
+            }
     }
 }

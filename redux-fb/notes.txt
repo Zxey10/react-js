@@ -1,4 +1,4 @@
-1. Total Expenses
+1. Total Expenses           OK
 2. Style items list
 3. Work on Edit
 4. Delete Expense

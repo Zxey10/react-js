@@ -3,21 +3,22 @@ import styles from "./ExpenseItem.module.scss";
 import { Container, Row, Col } from "react-bootstrap";
 import calendar from "../UI/images/calendar.png";
 import info from "../UI/images/info4.png";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useHttp } from "../hooks/use-http";
 import { fetchExpenseById } from "../lib/api";
 import { formatDateMonth } from "../helpers/dateFormat";
 import { addNewItem } from "../store/expenses-actions";
 import { useDispatch } from "react-redux";
 import useInput from "../hooks/use-input";
-import ItemList from "../Items/ItemList";
-
+import { deleteExpenseById } from "../store/expenses-actions";
+import { fetchExpenses } from "../store/expenses-actions";
 
 
 export default function ExpenseItem() {
   const params = useParams();
   const { expenseId } = params;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [expensesItems, setExpensesItems] = useState([]);
 
@@ -59,6 +60,11 @@ export default function ExpenseItem() {
     setExpensesItems(updatedExpensesItems);
   }
 
+  function deleteExpense(){
+    dispatch(deleteExpenseById(expenseId))
+    navigate('/expenses', { state:true,replace:true })
+  }
+
   let expenseValid = priceItemIsValid && expenseItemIsValid;
 
 
@@ -97,7 +103,6 @@ export default function ExpenseItem() {
   if (status === "completed") {
     let { day, month, year } = formatDateMonth(expenseData.date);
     const totalExpense = expenseData.items.reduce((acc,current) => acc + +current.price, 0)
-    console.log(totalExpense)
     return (
       <Container fluid className={styles.expenseItem}>
         <div className={styles.heading}>
@@ -127,7 +132,7 @@ export default function ExpenseItem() {
                   <button className="btn btn-warning text-white col-2">
                     Edit
                   </button>
-                  <button className="btn btn-danger col-2">Delete</button>
+                  <button onClick={deleteExpense} className="btn btn-danger col-2">Delete</button>
                 </div>
               </div>
             </Col>
@@ -141,8 +146,10 @@ export default function ExpenseItem() {
                         key={Math.random()}
                         className="d-flex justify-content-around align-items-center"
                       >
-                        <p>{item.text}</p>
-                        <p>${item.price}</p>
+                        <div className="d-flex w-100 justify-content-between mx-3 align-items-center">
+                          <p>{item.text}</p>
+                          <p>${item.price}</p>
+                        </div>                        
                       </div>
                     ))}
                   </div>

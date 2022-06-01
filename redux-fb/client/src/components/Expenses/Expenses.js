@@ -4,13 +4,11 @@ import { Container } from "react-bootstrap";
 import ExpenseCard from "../UI/ExpenseCard";
 import { useSelector } from "react-redux";
 import addIcon from '../UI/images/add.png'
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Expenses() {
-
-  const navigate = useNavigate();
+  
   const expenses = useSelector(state => state.expenses.expenses)
-
   return (
     <Container fluid className={styles.expenses}>
       <div className="py-5 mx-5 d-flex justify-content-between align-items-center">
