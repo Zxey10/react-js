@@ -1,8 +1,16 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialExpensesState = {
-    expenses: []
+    expenses: [],
+    reqStatus: null
 }
+
+export const getAllExpenses = createAsyncThunk(
+    "/expenses/getAllExpenses",
+    async (dispatch,getState) => {
+        return await fetch('https://expense-tracker-909a9-default-rtdb.europe-west1.firebasedatabase.app/Expenses.json').then(res => res.json())
+    }
+)
 
 const expensesSlice = createSlice({
     name: 'expenses',
@@ -24,6 +32,19 @@ const expensesSlice = createSlice({
             const index = state.expenses.findIndex(expense => expense.id === expenseId)
             //state.expenses.splice(index,1)     
             state.expenses =  state.expenses.filter(exp => exp.id !== expenseId)          
+        }
+    },
+    extraReducers: {
+        [getAllExpenses.pending]: (state,action) => {
+            state.reqStatus = 'loading'
+        },
+        [getAllExpenses.fulfilled]: (state,action) => {
+            state.reqStatus = 'success'
+            console.log(action.payload)
+            //state.expenses = action.payload
+        },
+        [getAllExpenses.rejected]: (state,action) => {
+            state.reqStatus = 'failed'
         }
     }
 })

@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { fetchExpenses } from "./components/store/expenses-actions";
 import ExpenseForm from "./components/ExpenseForm/ExpenseForm";
 import NotFound from "./pages/NotFound";
+import ReduxThunk from "./components/test/ReduxThunk";
 
 function App() {
  
@@ -31,6 +32,7 @@ function App() {
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/expenses/:expenseId" element={<ExpenseItem />} />
           <Route path="/newExpense" element={<ExpenseForm />} />
+          <Route path="/redux" element={<ReduxThunk />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
