@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 export default function Expenses() {
   
   const expenses = useSelector(state => state.expenses.expenses)
+  console.log(expenses)
 
   return (
     <Container fluid className={styles.expenses}>

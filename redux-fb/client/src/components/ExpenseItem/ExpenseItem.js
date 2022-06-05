@@ -11,7 +11,6 @@ import { addNewItem } from "../store/expenses-actions";
 import { useDispatch } from "react-redux";
 import useInput from "../hooks/use-input";
 import { deleteExpenseById } from "../store/expenses-actions";
-import { fetchExpenses } from "../store/expenses-actions";
 
 
 export default function ExpenseItem() {
@@ -55,10 +54,10 @@ export default function ExpenseItem() {
     setShowForm(true);
   }
 
-  function removeExpenseItem(id) {
-    const updatedExpensesItems = expensesItems.filter((item) => item.id !== id);
-    setExpensesItems(updatedExpensesItems);
+  function editExpense(){
+
   }
+
 
   function deleteExpense(){
     let ids = {
@@ -88,12 +87,16 @@ export default function ExpenseItem() {
     dispatch(addNewItem(expenseItm, expenseId, expenseData.id));
 
 
-    setTimeout(() => {
-      fetchExpense(expenseId);
-    },500)
 
 
   }
+
+  useEffect(() => {
+    if(status === 'completed'){
+      setExpensesItems(expenseData.items)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[status])
 
   if (status === "pending") {
     return <p>Pending ...</p>;
@@ -105,6 +108,7 @@ export default function ExpenseItem() {
 
 
   if (status === "completed") {
+    
     let { day, month, year } = formatDateMonth(expenseData.date);
     const totalExpense = expenseData.items.reduce((acc,current) => acc + +current.price, 0)
     return (
@@ -133,7 +137,7 @@ export default function ExpenseItem() {
                   {expenseData.notes}
                 </p>
                 <div className="d-flex justify-content-around align-items-center">
-                  <button className="btn btn-warning text-white col-2">
+                  <button onClick={editExpense} className="btn btn-warning text-white col-2">
                     Edit
                   </button>
                   <button onClick={deleteExpense} className="btn btn-danger col-2">Delete</button>
@@ -145,7 +149,7 @@ export default function ExpenseItem() {
                 <h3>Items</h3>
                 <div className={styles.itemList}>
                   <div className={`${styles.items} ${expenseData.items.length > 0 ? 'border border-white' : ''}`}>
-                    {expenseData.items.map((item) => (
+                    {expensesItems.map((item) => (
                       <div
                         key={Math.random()}
                         className="d-flex justify-content-around align-items-center"

@@ -34,7 +34,6 @@ export const fetchExpenses = () => {
                 })
                 newItems = []
             }
-
             dispatch(expenseActions.getExpenses({
                 expenses : newExpenses
             }));
@@ -112,7 +111,7 @@ export const addNewItem = (item, expenseFBId, expenseId) => {
 
 
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
         }
     }
 }
