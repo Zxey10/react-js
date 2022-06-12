@@ -15,7 +15,8 @@ export const fetchExpenseById = async (expenseId) => {
         transformedItems.push({
             id: json.items[key].id,
             price: json.items[key].price,
-            text: json.items[key].text
+            text: json.items[key].text,
+            FBId: key
         })
     }
 

@@ -12,34 +12,7 @@ export const getAllExpenses = createAsyncThunk(
     }
 )
 
-export const addItem2 = createAsyncThunk(
-    '/expenses/addItem2',
-    async({expenseFBId,item,expenseId},dispatch) => {
-        const reqConfig = {
-            url: `https://expense-tracker-909a9-default-rtdb.europe-west1.firebasedatabase.app/Expenses/${expenseFBId}/items/.json`,
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-        }
-        try {
-            const res = await fetch(reqConfig.url,{
-                method: reqConfig.method,
-                headers: reqConfig.headers,
-                body: reqConfig.body
-            });
 
-            
-            if(!res.ok) throw new Error('Failed to add item')
-
-            dispatch(expenseActions.addItem({item,expenseId}))
-
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-)
 
 const expensesSlice = createSlice({
     name: 'expenses',
@@ -53,8 +26,9 @@ const expensesSlice = createSlice({
         },
         addItem(state,action){
 
-           const { item , expenseId } = action.payload;
+           const { item , expenseId, FBId } = action.payload;
            const newExpense = state.expenses.find(exp => exp.id === expenseId)
+           item.FBId = FBId;
            const newItems = [...newExpense.items]
            newItems.push(item)
            
@@ -72,7 +46,7 @@ const expensesSlice = createSlice({
                 ...state,
                 expenses: exp
             }     
-        }
+        },
     },
     extraReducers: {
         [getAllExpenses.pending]: (state,action) => {

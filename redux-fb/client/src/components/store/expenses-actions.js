@@ -20,7 +20,8 @@ export const fetchExpenses = () => {
                     newItems.push({
                         id: json[key].items[key1].id,
                         price: json[key].items[key1].price,
-                        text: json[key].items[key1].text
+                        text: json[key].items[key1].text,
+                        FBId: key1
                     })
                 }
                 newExpenses.push({
@@ -107,7 +108,7 @@ export const addNewItem = (item, expenseFBId, expenseId) => {
             const json = await res.json();
             console.log(json)
 
-            dispatch(expenseActions.addItem({item, expenseId}))
+            dispatch(expenseActions.addItem({item, expenseId,FBId: json.name}))
 
 
         } catch (error) {
@@ -138,6 +139,30 @@ export const deleteExpenseById = (ids) => {
                 dispatch(expenseActions.deleteExpense({expenseId: ids.expenseNormalId}))
                 // dispatch(fetchExpenses())
                
+    
+            } catch (error) {
+                console.log(error.message)
+            }
+    }
+}
+
+export const deleteExpenseItemsById = (id) => {
+    return async(dispatch) => {
+        const reqConfig = {
+            url: `https://expense-tracker-909a9-default-rtdb.europe-west1.firebasedatabase.app/Expenses/${id.expenseFBId}/items/${id.itemFBId}.json`,
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+            try {
+                const res = await fetch(reqConfig.url,{
+                    method: reqConfig.method,
+                    headers: reqConfig.headers,
+                    body: reqConfig.body
+                });
+    
+                if(!res.ok) throw new Error('Failed to delete item')               
     
             } catch (error) {
                 console.log(error.message)

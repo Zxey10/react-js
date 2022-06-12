@@ -64,11 +64,15 @@
             margin-top: 1.5rem;
             background-color: #61FF;
             padding: 0.5rem 1.5rem;
+            margin-right: 1rem;
             border: none;
             color: white;
             transition: 0.5s;
             &:hover{
                 transform: scale(1.1);
+            }
+            &:nth-child(2){
+                background-color: orange;
             } 
         }
         form{
