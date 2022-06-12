@@ -1,0 +1,53 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.mainDiv{
+  display: flex;
+  height: 500px;
+}
+.canvasDiv{
+  width: 50%;
+}
+.header-text{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  align-items: center;
+  padding: 2rem;
+}
+.header-text p{
+  margin: 1rem;
+  margin-top: 2rem;
+  text-align: justify;
+}
+.btns{
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.btns button{
+  padding: 0.25rem;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  margin: 0.2rem;
+  cursor: pointer;
+}
+
+.btns button:nth-of-type(1){
+  background-color: orangered;
+}
+.btns button:nth-of-type(2){
+  background-color: coral;
+}
+.btns button:nth-of-type(3){
+  background-color: royalblue;
+}
