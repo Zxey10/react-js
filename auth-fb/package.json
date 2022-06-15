@@ -1,19 +1,17 @@
 {
-  "name": "3d-test",
+  "name": "react-complete-guide",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^9.13.0",
-    "@react-three/fiber": "^8.0.23",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "gltf-import-export": "^1.0.20",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-scripts": "5.0.1",
-    "three": "^0.141.0",
-    "web-vitals": "^2.1.0"
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.5.0",
+    "dotenv": "^16.0.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
