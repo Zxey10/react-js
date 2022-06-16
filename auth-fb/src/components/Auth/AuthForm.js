@@ -1,5 +1,15 @@
-import { useState, useRef } from "react";
+import { useState, useRef, render } from "react";
 import classes from "./AuthForm.module.css";
+import AuthContext from "../../store/auth-context";
+import { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import FlashMessage from 'react-flash-message'
+
+const Message = ({message,duration}) => (
+  <FlashMessage duration={duration} className={classes.flash}>
+    <strong className={classes.flash}>{message}!</strong>
+  </FlashMessage>
+)
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -7,7 +17,10 @@ const AuthForm = () => {
   const passwordRef = useRef();
   const [errorMsg,setErrorMsg] = useState(null)
   const [isLoading,setIsLoading] = useState(false)
-  const [isLoggedIn,setIsLoggedIn] = useState(false)
+  const authCtx = useContext(AuthContext)
+  const [showFlash,setShowFlash] = useState(false)
+  let history = useHistory();
+  
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -23,6 +36,7 @@ const AuthForm = () => {
     
   
     if (isLogin) {
+      setShowFlash(false)
       let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_KEY}`
       try {
         const res = await fetch(
@@ -48,7 +62,12 @@ const AuthForm = () => {
         const json = await res.json();
         console.log(json)
 
-        setIsLoggedIn(true)
+
+        authCtx.login(json.idToken);
+
+        setShowFlash(true)
+
+        setTimeout(() => {history.replace('/profile')},2000)
 
       } catch (error) {
         console.log(error)
@@ -86,6 +105,7 @@ const AuthForm = () => {
 
   return (
     <section className={classes.auth}>
+      {showFlash && <Message message='Logged In' duration={1000} />}
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>
@@ -107,7 +127,7 @@ const AuthForm = () => {
             {isLogin ? "Create new account" : "Login with existing account"}
           </button>
           {errorMsg !== null && <p className={classes['auth-error']}>{errorMsg}</p>}
-          {isLoggedIn && <p>Logged In</p>}
+          {authCtx.isLoggedIn && <p>Logged In</p>}
         </div>
       </form>
       <button onClick={() => {console.log(process.env)}}>ENV</button>
