@@ -1,7 +1,9 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useEffect, useCallback } from 'react'
 import AuthContext from './auth-context'
 
 const initialToken = localStorage.getItem('token')
+
+let logoutTimer;
 
 const ACTIONS = {
     LOGIN: 'LOGIN',
@@ -9,7 +11,7 @@ const ACTIONS = {
 }
 
 const defaultState = {
-    isLoggedIn: initialToken === undefined ? false : true,
+    isLoggedIn: initialToken === null ? false : true,
     token: initialToken
 }
 
@@ -29,25 +31,68 @@ const authReducer = (state,action) => {
    }
 }
 
+const calculateRemainingTime = (expirationTime) => {
+    const currentTime = new Date().getTime();
+    const expTime = new Date(expirationTime).getTime();
+
+    const remainingDuration = expTime - currentTime;
+
+    return remainingDuration;
+}
+
+const retrieveStoredTime = () => {
+    const storedExpirationTime = localStorage.getItem('expirationTime')
+    const storedToken = localStorage.getItem('token')
+
+    const remainingTime = calculateRemainingTime(storedExpirationTime)
+
+    if(remainingTime <= 60000){
+        localStorage.removeItem('token')
+        localStorage.removeItem('expirationTime')
+        return null;
+    }
+    return {
+        token: storedToken,
+        duration: remainingTime
+    }
+}
+
 export default function AuthProvide(props) {
     const [authState,dispatch] = useReducer(authReducer,defaultState)
-
-    const login = (token) => {
-        localStorage.setItem('token', token)
-        dispatch({
-            type: 'LOGIN',
-            token
-        })
-    }
-
-    const logout = () => {
+    const tokenData = retrieveStoredTime()
+    
+    const logout = useCallback(() => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('expirationTime')
         dispatch({
             type: 'LOGOUT', 
             token: ''
         })
-        localStorage.removeItem('token')
+
+        if(logoutTimer){
+            clearTimeout(logoutTimer)
+        }
+
+    },[])
+
+    const login = (token, expirationTime) => {
+        localStorage.setItem('token', token)
+        localStorage.setItem('expirationTime', expirationTime)
+        const remainingTime = calculateRemainingTime(expirationTime)
+        dispatch({
+            type: 'LOGIN',
+            token
+        })
+        logoutTimer = setTimeout(logout,remainingTime)        
     }
 
+    useEffect(() => {
+       if(tokenData){
+            console.log(tokenData.duration)
+            logoutTimer = setTimeout(logout,tokenData.duration) 
+       }               
+    },[tokenData, logout])
+    
     const authContext = {
         isLoggedIn: authState.isLoggedIn,
         login: login,

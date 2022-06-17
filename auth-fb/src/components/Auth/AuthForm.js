@@ -62,8 +62,9 @@ const AuthForm = () => {
         const json = await res.json();
         console.log(json)
 
+        const expirationTime = new Date(new Date().getTime() + Number(json.expiresIn * 1000))
 
-        authCtx.login(json.idToken);
+        authCtx.login(json.idToken, expirationTime.toISOString());
 
         setShowFlash(true)
 
