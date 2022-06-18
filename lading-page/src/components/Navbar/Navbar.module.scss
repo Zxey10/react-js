@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+.navigation{
+    padding:2rem 7rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #212121;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    .navigationLinks{
+        a{
+            margin:0 0.5rem;
+            text-decoration: none;
+            color: white;
+            transition: linear 0.5s;
+            &:hover{
+                color: greenyellow;
+                text-decoration: underline;
+                text-decoration-color: white;
+                text-decoration-style: solid;
+                text-decoration-thickness: 2px;
+            }
+        }
+    }
+   
+}
