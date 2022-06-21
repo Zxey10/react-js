@@ -1,0 +1,28 @@
+.expenses {
+  min-height: 100vh;
+  height: 100%;
+  background-color: #212121;
+}
+.expenses .expenseList {
+  color: white;
+  font-size: 24px;
+  margin: 0 5rem;
+}
+.expenses .expensesCards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  flex-wrap: wrap;
+  flex-basis: 33%;
+}
+.expenses .addBtn {
+  filter: contrast(150%);
+  width: 34px;
+  height: 34px;
+  transition: 0.5s;
+  margin: 0 5rem;
+}
+.expenses .addBtn:hover {
+  filter: contrast(300%);
+}/*# sourceMappingURL=Expenses.module.css.map */

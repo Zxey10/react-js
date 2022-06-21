@@ -1,0 +1,15 @@
+.cart {
+  width: 60%;
+  border-radius: 12px;
+  margin: 2rem;
+  padding: 1rem;
+}
+.cart button {
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
+}
+.cart .cartItem {
+  background-color: #353535;
+  border-radius: 10px;
+  padding: 1rem;
+}/*# sourceMappingURL=Cart.module.css.map */

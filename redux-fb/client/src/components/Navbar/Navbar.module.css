@@ -1,0 +1,12 @@
+.navbar {
+  width: 100%;
+  background-color: #212121;
+}
+.navbar a {
+  color: gray;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+.navbar .active {
+  color: white;
+}/*# sourceMappingURL=Navbar.module.css.map */

@@ -1,0 +1,38 @@
+.quote {
+  height: 100%;
+  background-color: cadetblue;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.quote .card {
+  margin-top: 2rem;
+  padding: 5rem;
+  background-color: #212121;
+  color: white;
+  border-radius: 10px;
+}
+.quote .card p {
+  text-align: end;
+}
+.quote .comments {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.quote .comments h3, .quote .comments h6 {
+  margin: 1rem;
+}
+.quote button {
+  margin-top: 1rem;
+  background-color: aquamarine;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+.quote button:hover {
+  background-color: aqua;
+}/*# sourceMappingURL=Quote.module.css.map */

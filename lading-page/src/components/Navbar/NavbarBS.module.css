@@ -1,0 +1,19 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid crimson;
+  padding: 1rem 4rem;
+}
+.navbar .navLinks a {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: gray;
+  transition: cubic-bezier(0.21, 0.72, 0.5, 0.27) 0.5s;
+}
+.navbar .navLinks a:hover {
+  color: greenyellow;
+}
+.navbar .navLinks .active {
+  color: white;
+}/*# sourceMappingURL=NavbarBS.module.css.map */

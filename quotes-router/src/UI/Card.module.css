@@ -1,0 +1,25 @@
+.card {
+  background-color: yellowgreen;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  margin: 1rem;
+}
+.card .text {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+}
+.card button {
+  background-color: aquamarine;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+.card button:hover {
+  background-color: aqua;
+}/*# sourceMappingURL=Card.module.css.map */

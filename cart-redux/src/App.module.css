@@ -1,0 +1,9 @@
+.mainDiv {
+  height: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: pink;
+}/*# sourceMappingURL=App.module.css.map */
