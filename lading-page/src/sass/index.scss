@@ -1,0 +1,11 @@
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
+@import "./variables";
+@import "./header";
+@import "./mixins";
+@import "./slider";
+@import "./slider2";
+
+body{
+    background-color: #212121;
+}

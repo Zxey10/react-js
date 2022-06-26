@@ -4,6 +4,14 @@
     align-items: center;
     border: 1px solid crimson;
     padding: 1rem 4rem;
+    & a{
+        & svg{
+           transition:1s linear;
+            &:hover{
+                transform: rotate(360deg) translateY(10px) scale(1.1);
+            } 
+       }
+    }
     .navLinks{
         a{
             margin:0 0.5rem;

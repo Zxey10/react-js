@@ -1,0 +1,14 @@
+1. Total Expenses           OK
+2. Style items list         
+3. Work on Edit 
+4. Delete Expense           OK
+5. Delete Items             OK
+
+
+//   let rows = [...Array(Math.ceil(EXPENSES.length / 3))]
+//   const expensesRows = rows.map( (row, idx) => EXPENSES.slice(idx * 3, idx * 3 + 3) );
+//   const content = expensesRows.map((row, idx) => (
+//     <Row className="my-3" key={idx}>    
+//     { row.map( expense => <Col className="d-flex mt-2 justify-content-center align-items-center"><ExpenseCard expense={expense}/></Col>)}
+//     </Row> )
+// );

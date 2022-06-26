@@ -1,0 +1,33 @@
+.card {
+  margin: 1rem;
+  background-color: #303030;
+  color: white;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  height: 21rem;
+  width: 19.25rem;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.card .title h3 {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+.card .date h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.card .amount h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.card .btn img {
+  cursor: pointer;
+  transition: 0.5s;
+  margin-top: 0.5rem;
+}
+.card .btn img:hover {
+  filter: contrast(200%);
+}/*# sourceMappingURL=ExpenseCard.module.css.map */

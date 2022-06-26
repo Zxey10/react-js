@@ -1,0 +1,91 @@
+.expenseItem {
+  height: calc(100vh - 3.5rem);
+  background-color: #212121;
+  color: white;
+}
+.expenseItem .expenseCard {
+  background: #303030;
+}
+.expenseItem .heading {
+  display: flex;
+  padding: 2rem;
+  margin: 0 2rem;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+.expenseItem .heading h1 {
+  font-size: 1.5rem;
+}
+.expenseItem .column {
+  border-right: 1px solid white;
+}
+.expenseItem .left .date {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.expenseItem .left .info {
+  width: 30px;
+  height: 30px;
+}
+.expenseItem .left .edit {
+  background-color: orange;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  color: white;
+  transition: 0.5s;
+}
+.expenseItem .left .edit:hover {
+  transform: scale(1.1);
+}
+.expenseItem .right {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+.expenseItem .right h3 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+.expenseItem .right .items {
+  padding: 1rem;
+  width: 300px;
+  list-style: none;
+  border-radius: 12px;
+}
+.expenseItem .right .btn {
+  margin-top: 1.5rem;
+  background-color: #6611ff;
+  padding: 0.5rem 1.5rem;
+  margin-right: 1rem;
+  border: none;
+  color: white;
+  transition: 0.5s;
+}
+.expenseItem .right .btn:hover {
+  transform: scale(1.1);
+}
+.expenseItem .right .btn:nth-child(2) {
+  background-color: orange;
+}
+.expenseItem .right form div {
+  margin: 1rem 0;
+}
+.expenseItem .right form .addBtn {
+  background-color: coral;
+  border: none;
+  padding: 1rem;
+  color: white;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+.expenseItem .right form .priceLabel {
+  left: revert;
+}
+.expenseItem .left {
+  padding: 2rem;
+}/*# sourceMappingURL=ExpenseItem.module.css.map */

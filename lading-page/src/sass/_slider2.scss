@@ -1,0 +1,16 @@
+.slider-container2{
+    margin: 1rem 2rem;
+    & .slick-slider{
+        max-height: 400px;
+        & .img-container{
+            max-height: 400px;
+            
+                & img{
+                    object-fit: cover;
+                    height: 200px;
+                    cursor: pointer;
+                }
+            
+        }
+    }
+}

@@ -1,0 +1,48 @@
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &  .logo {
+        margin: 60px auto auto;
+        width: 250px;
+        object-fit: cover;
+    }
+
+    & .title {
+        margin: 90px auto auto;
+        font-size: 40;
+        font-family: 'Krona One';
+    }
+    
+    & p {
+        width: 70vw;
+        margin: 30px auto auto;
+        font-size: 24;
+        text-align: center;
+        font-family: 'Poppins';
+    }
+
+    & .choices {
+        float: right;
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+        &>li {
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: 0.5s ease-in;
+            cursor: pointer;
+            user-select: none;
+
+            &:hover {
+                border: 1px solid white;
+            }
+        }
+    }
+}

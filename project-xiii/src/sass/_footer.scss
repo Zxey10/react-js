@@ -1,0 +1,36 @@
+.footer{
+    padding: 1rem;
+    & > *{
+        margin: 0;
+        padding: 0;
+    }
+    overflow: hidden;
+    hr{
+        margin-bottom: 1rem;
+        width: 80%;
+        border-top: 1px solid white;
+    }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    @include d-flex(column);
+    &__list{
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & li{
+            margin: 0 1rem;
+            & a{
+                & img{
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+        }
+    }
+    &__cp{
+        color: $textColor;
+    }
+}

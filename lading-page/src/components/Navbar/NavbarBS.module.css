@@ -5,6 +5,12 @@
   border: 1px solid crimson;
   padding: 1rem 4rem;
 }
+.navbar a svg {
+  transition: 1s linear;
+}
+.navbar a svg:hover {
+  transform: rotate(360deg) translateY(10px) scale(1.1);
+}
 .navbar .navLinks a {
   margin: 0 0.5rem;
   text-decoration: none;

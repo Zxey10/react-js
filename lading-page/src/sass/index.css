@@ -1,0 +1,40 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+.slide-container {
+  margin: 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+.slide-container .alice-carousel {
+  margin-top: 1rem;
+}
+.slide-container .alice-carousel .alice-carousel__wrapper .alice-carousel__stage .alice-carousel__stage-item img {
+  border: 1px solid red;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  padding: 0 1rem;
+  height: 300px;
+}
+
+.slider-container2 {
+  margin: 1rem 2rem;
+}
+.slider-container2 .slick-slider {
+  max-height: 400px;
+}
+.slider-container2 .slick-slider .img-container {
+  max-height: 400px;
+}
+.slider-container2 .slick-slider .img-container img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 200px;
+  cursor: pointer;
+}
+
+body {
+  background-color: #212121;
+}/*# sourceMappingURL=index.css.map */

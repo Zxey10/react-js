@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+.slider {
+  margin: 1rem 2rem;
+}
+.slider .slick-slider {
+  max-height: 400px;
+}
+.slider .slick-slider .slider__img {
+  max-height: 400px;
+}
+.slider .slick-slider .slider__img img {
+  margin-left: 2rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 200px;
+  cursor: pointer;
+}
+
+.footer {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.footer hr {
+  width: 80%;
+  border-top: 1px solid white;
+}
+.footer .footer__list {
+  list-style: none;
+  display: flex;
+}
+.footer .footer__list li {
+  margin: 0 1rem;
+}
+.footer .footer__list li a img {
+  width: 32px;
+  height: 32px;
+}
+.footer p {
+  margin: auto 0;
+  margin-bottom: 1rem;
+  color: #FFFFFF;
+}
+
+.header {
+  font-family: "Oswald", sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 5rem;
+}
+.header .header__img {
+  margin-top: 3rem;
+  width: 15.625rem;
+  cursor: pointer;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #0C0C0C;
+}
+
+main {
+  margin: 0 5rem;
+}/*# sourceMappingURL=index.css.map */

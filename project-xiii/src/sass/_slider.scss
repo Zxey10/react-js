@@ -1,0 +1,22 @@
+.slider{
+    &  > *{
+        margin: 0;
+        padding: 0%;
+    }
+    margin: 1rem 2rem;
+    & .slick-slider{
+        max-height: 400px;
+        & .slick-list{
+            & .slider__img{
+                max-height: 400px;
+                    & img{
+                        margin-inline: auto;
+                        object-fit: cover;
+                        height: 200px;
+                        cursor: pointer;
+                    }
+                
+            }
+        }
+    }
+}

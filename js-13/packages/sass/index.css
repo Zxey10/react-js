@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+@import url("https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css");
+.header {
+  position: relative;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.header .logo {
+  margin: 60px auto auto;
+  width: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.header .title {
+  margin: 90px auto auto;
+  font-size: 40;
+  font-family: 'Krona One';
+}
+
+.header p {
+  width: 70vw;
+  margin: 30px auto auto;
+  font-size: 24;
+  text-align: center;
+  font-family: 'Poppins';
+}
+
+.header .choices {
+  float: right;
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 15px;
+}
+
+.header .choices > li {
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.header .choices > li:hover {
+  border: 1px solid white;
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.footer > * {
+  margin: auto;
+}
+
+.footer hr {
+  margin: 30px auto;
+  width: 70vw;
+  color: white;
+}
+
+.footer .redirect__list {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 30px;
+}
+
+.footer .redirect__list li {
+  font-size: 64px;
+}
+
+.footer .copyright {
+  font-size: 24px !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 50px;
+  font-family: "Poppins", sans-serif;
+  background: #0C0C0C;
+  color: white;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+/*# sourceMappingURL=index.css.map */

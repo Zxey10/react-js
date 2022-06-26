@@ -1,0 +1,18 @@
+.baietii{
+    background-color: #212121;
+    color: rgb(179, 174, 183);
+    list-style: none;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.baietii li{
+    margin: 1rem;
+    transition:all 1s linear;    
+}
+.baietii li:hover{
+    color: greenyellow;
+}
+
+

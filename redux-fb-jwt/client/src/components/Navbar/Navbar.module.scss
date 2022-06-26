@@ -1,0 +1,12 @@
+.navbar{
+    width: 100%;
+    background-color: #212121;
+    a{
+        color: gray;
+        text-decoration: none;
+        margin: 0 1rem;
+    }
+    .active{
+        color: white;
+    }
+}

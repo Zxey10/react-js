@@ -8,12 +8,12 @@ export default function NavbarBS() {
   return (
     <Fragment>
       <Navbar className={styles.navbar} collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="#home" className='and'>
           <Ghost  
             alt=""
             width="30"
             height="30"
-            className="d-inline-block align-top mx-2"
+            className="d-inline-block align-top mx-2 andrea"
           />
           Landing Page
         </Navbar.Brand>
@@ -24,6 +24,7 @@ export default function NavbarBS() {
             <NavLink className={(navData) => navData.isActive ? `${styles.active}` : ""} to="/about">About</NavLink>
             <NavLink className={(navData) => navData.isActive ? `${styles.active}` : ""} to="/products">Products</NavLink>
             <NavLink className={(navData) => navData.isActive ? `${styles.active}` : ""} to="/contact">Contact</NavLink>
+            <NavLink className={(navData) => navData.isActive ? `${styles.active}` : ""} to="/landing">Landing</NavLink>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

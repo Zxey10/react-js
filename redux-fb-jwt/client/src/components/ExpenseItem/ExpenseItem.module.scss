@@ -1,0 +1,98 @@
+.expenseItem{
+    height: calc(100vh - 3.5rem);
+    background-color: #212121;
+    color: white;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    .expenseCard{
+        background:#303030;
+    }
+    .heading{
+        display: flex;
+        padding: 2rem;
+        margin: 0 2rem;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        h1{
+            font-size: 1.5rem;
+        }
+    }
+    .column{
+        border-right: 1px solid white;
+    }
+    .left{
+        .date{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            align-items: center;
+        }
+        .info{
+            width: 30px;
+            height: 30px;
+        }
+        .edit{
+            background-color: orange;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            color: white;
+            transition: 0.5s;
+            &:hover{
+                transform: scale(1.1);
+            }            
+        }
+    }
+    .right{
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        h3{
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+        .items{
+            padding: 1rem;
+            width: 300px;
+            list-style: none;
+            border-radius: 12px;
+        }
+        .btn{
+            margin-top: 1.5rem;
+            background-color: #61FF;
+            padding: 0.5rem 1.5rem;
+            margin-right: 1rem;
+            border: none;
+            color: white;
+            transition: 0.5s;
+            &:hover{
+                transform: scale(1.1);
+            }
+            &:nth-child(2){
+                background-color: orange;
+            } 
+        }
+        form{
+            div{
+                margin: 1rem 0;
+            }
+            .addBtn{
+                background-color: coral;
+                border: none;
+                padding: 1rem;
+                color: white;
+                margin-left: 10px;
+                border-radius: 10px;
+            }
+            .priceLabel{
+                left: revert;
+            }
+        }
+    }
+    .left{
+        padding: 2rem;
+    }
+}

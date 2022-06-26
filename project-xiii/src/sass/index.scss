@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import "./mixins";
+@import "./variables";
+@import "./slider";
+@import "./footer";
+@import "./header";
+
+
+body{
+    min-height: 100vh;
+    background-color: $bgColor;
+}
+
+main{
+    margin-inline: 3rem;
+    
+}
+

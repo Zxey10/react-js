@@ -1,0 +1,12 @@
+.header{
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    @include d-flex(column);
+    text-align: center;
+    margin: 0 5rem;
+    & .header__img{
+        margin-top: 3rem;
+        width: 15.625rem;
+        cursor: pointer;
+    }
+}

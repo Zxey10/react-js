@@ -14,29 +14,42 @@
 }
 
 .nav__search {
-  border: 1px solid greenyellow;
   display: flex;
+  margin: 0 2rem;
   align-items: center;
   color: white;
+  flex: 3;
 }
-.nav__search .nav__search__input {
+.nav__search .nav_search-inp {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.nav__search .nav_search-inp .nav__search__input {
+  flex: 1;
   background-color: hsl(0deg, 0%, 7%);
+  padding: 0.5rem;
+  border: none;
+  color: white;
 }
-.nav__search .nav__search__input :focus {
-  outline-color: royalblue;
+.nav__search .nav_search-inp .nav__search__input:focus {
+  border: none;
+  outline: 1px solid royalblue;
 }
-.nav__search .nav__search__button {
+.nav__search .nav_search-inp .nav__search__button {
   cursor: pointer;
-  background-color: transparent;
+  background-color: hsl(0deg, 0%, 18.82%);
   border: none;
 }
-.nav__search .nav__search__button .nav__search__icon {
+.nav__search .nav_search-inp .nav__search__button .nav__search__icon {
   width: 24px;
   height: 24px;
+  margin: 0 10px;
 }
 .nav__search .nav_search__button--mic {
   cursor: pointer;
   border: none;
+  margin: 0 10px;
   background-color: transparent;
 }
 .nav__search .nav_search__button--mic .nav__search__icon {
@@ -45,21 +58,67 @@
 }
 
 .nav__icons {
-  border: 1px solid red;
+  flex: 1;
 }
 .nav__icons .nav__icons-list {
+  margin: 0 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   list-style: none;
 }
 .nav__icons .nav__icons-list .nav__icons-btn {
+  margin: 0 0.5rem;
   cursor: pointer;
   background: transparent;
   border: none;
+}
+.nav__icons .nav__icons-list .nav__icons-btn svg {
+  width: 24px;
+  height: 24px;
 }
 .nav__icons .nav__icons-list .nav__icons-img {
   width: 32px;
   border-radius: 100%;
   height: 32px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.header {
+  background-color: #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header img {
+  width: 64px;
+  height: 64px;
+}
+
+.mainDiv {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.mainDiv footer {
+  margin-top: auto;
 }/*# sourceMappingURL=index.css.map */

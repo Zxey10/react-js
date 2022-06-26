@@ -107,3 +107,23 @@ $searchBarColor: hsl(0, 0%, 7%);
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+
+  .header{
+    background-color: #212121;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+        width: 64px;
+        height: 64px;
+    }
+  }
+
+  .mainDiv{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    footer{
+        margin-top: auto;
+    }
+}
