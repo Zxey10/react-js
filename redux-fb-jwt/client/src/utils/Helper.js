@@ -10,8 +10,23 @@ const removeToken = () => {
     localStorage.removeItem('token');
 }
 
+const getRefreshToken = () => {
+    return localStorage.getItem('refresh_token')
+}
+
+const setRefreshToken = (val) => {
+    localStorage.setItem('refresh_token',val)
+}
+
+const removeRefreshToken = () => {
+    localStorage.removeItem('refresh_token')
+}
+
 export {
     getToken,
     setToken,
-    removeToken
+    removeToken,
+    getRefreshToken,
+    setRefreshToken,
+    removeRefreshToken
 }

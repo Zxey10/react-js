@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './components/store/index'
 import { Provider } from 'react-redux';
-import { getToken } from './utils/Helper';
+import { getRefreshToken, getToken } from './utils/Helper';
 import { fetchUserData } from './components/store/authThunk';
 
 if(getToken()){

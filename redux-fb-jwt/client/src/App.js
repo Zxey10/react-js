@@ -14,7 +14,11 @@ import NotFound from "./pages/NotFound";
 import ReduxThunk from "./components/test/ReduxThunk";
 import PrivateRoute from "./components/Private/PrivateRoute";
 import Test from "./pages/Test";
-
+import jwt_decode from 'jwt-decode'
+import api from "./services/api";
+import { getToken, setRefreshToken, setToken } from "./utils/Helper";
+import { refresJWTToken } from "./components/store/authThunk";
+import axios from "axios";
 
 function App() {
  
@@ -26,6 +30,29 @@ function App() {
     dispatch(fetchExpenses()) 
   },[dispatch])
 
+  api.interceptors.request.use(
+    async(config) => {
+      console.log('Refresh')
+        let currentDate = new Date()
+        const token = getToken()
+        let decodedToken;
+        if(token){
+          decodedToken = jwt_decode(token);
+        }
+        if(decodedToken && (decodedToken.exp * 1000 < currentDate.getTime())){
+          console.log('Refresh Token')
+          const { accessToken } = await refresJWTToken()
+          config.headers = {
+            ...config.headers,
+            Authorization: `Bearer ${accessToken}`,
+          }
+        }
+        return config
+    },(error) => {
+      console.log(error)
+      Promise.reject(error)
+    }
+  )
   
 
   return (
