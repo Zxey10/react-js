@@ -1,0 +1,27 @@
+.nav{
+    background-color: white;
+    &__list{
+        list-style: none;
+        padding: 0;
+        @include d-flex(row);
+        gap: 30px;
+        &__item{
+            &__link{
+                color: rgb(0, 0, 0);
+                font-weight: 700;
+                font-size: 32px;
+                text-decoration: none;
+                transition: 0.5s ease-in-out;
+                &.active{
+                    text-decoration: underline;
+                }
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+
+
+
+        }
+    }
+}

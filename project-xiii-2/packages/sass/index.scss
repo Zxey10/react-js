@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+@import url('https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+@import 'functions';
+@import 'mixins';
+@import 'layout';
+@import 'nav';
+@import 'sidebar';
+@import 'landing';
+@import 'products';
+@import 'contact';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-inline: 50px;
+    padding-block: 20px;    
+    font-family: 'Oswald', sans-serif;
+    background-color: white;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+
+    &:hover {
+        color: inherit;
+        text-decoration: inherit;
+    }
+}

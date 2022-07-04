@@ -17,11 +17,12 @@ import Test from "./pages/Test";
 import jwt_decode from 'jwt-decode'
 import api from "./services/api";
 import { getToken, setRefreshToken, setToken } from "./utils/Helper";
-import { refresJWTToken } from "./components/store/authThunk";
-import axios from "axios";
+import { refresJWTToken, authVerify } from "./components/store/authThunk";
+import { useLocation } from "react-router-dom";
+
 
 function App() {
- 
+  const location = useLocation();
   const dispatch = useDispatch();
   const data = useSelector(state => state.auth)
   console.table(data)
@@ -30,34 +31,14 @@ function App() {
     dispatch(fetchExpenses()) 
   },[dispatch])
 
-  api.interceptors.request.use(
-    async(config) => {
-      console.log('Refresh')
-        let currentDate = new Date()
-        const token = getToken()
-        let decodedToken;
-        if(token){
-          decodedToken = jwt_decode(token);
-        }
-        if(decodedToken && (decodedToken.exp * 1000 < currentDate.getTime())){
-          console.log('Refresh Token')
-          const { accessToken } = await refresJWTToken()
-          config.headers = {
-            ...config.headers,
-            Authorization: `Bearer ${accessToken}`,
-          }
-        }
-        return config
-    },(error) => {
-      console.log(error)
-      Promise.reject(error)
-    }
-  )
-  
+  useEffect(() => {
+    authVerify()
+    console.log(localStorage.getItem('token'))
+  },[location])
+
 
   return (
     <Fragment>
-      <BrowserRouter>
       <Navbar />
         <Routes>
           <Route path="/" element={<MainPage />} />
@@ -72,7 +53,6 @@ function App() {
           <Route path="/redux" element={<ReduxThunk />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
     </Fragment>
   );
 }

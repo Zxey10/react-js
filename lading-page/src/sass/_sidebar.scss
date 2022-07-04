@@ -1,0 +1,13 @@
+.sidebar{
+    margin-left: auto;
+    height: calc(100vh - 4.75rem);
+    width: 75px;
+    background-color: rgb(66, 191, 21);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__text{
+        writing-mode: vertical-lr;
+        color: white;
+    }
+}

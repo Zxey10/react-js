@@ -39,12 +39,17 @@ const users = [
     
 ];
 
-app.use(cors());
+app.use(
+    cors({
+      origin: ["http://localhost:3000"],
+      credentials: true,
+    })
+  );
 
 dotenv.config();
 
 function generateToken(data) {
-    return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '5000' });
+    return jwt.sign(data, process.env.TOKEN_SECRET, { expiresIn: '120s' });
 }
 let refreshTokens = [];
 const generateRefreshToken = (user) => {
@@ -56,13 +61,20 @@ app.use(express.json());
 //! Middleware
 
 const authenticateJWT = (req, res, next) => {
-    const authHeader = req.headers.authorization;
+    console.log(process.env.TOKEN_SECRET)
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+    
+    console.log(authHeader)
 
     if (authHeader) {
-        const token = authHeader.split(' ')[1];
+
+        console.log(token)
 
         jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
             if (err) {
+                console.log(err)
                 return res.sendStatus(403);
             }
 
@@ -77,6 +89,7 @@ const authenticateJWT = (req, res, next) => {
 //! Get Req
 
 app.get('/user', authenticateJWT,(req, res) => {
+    console.log("user req")
     const {email} = req.user;
 
     console.log(email)
@@ -97,6 +110,8 @@ app.get('/user', authenticateJWT,(req, res) => {
 });
 
 app.post('/login', (req, res) => {
+    console.log("login req")
+
     const { email, password } = req.body;
 
     const user = users.find(u => u.email === email && u.password === password);
@@ -104,8 +119,6 @@ app.post('/login', (req, res) => {
     if (user) {
         const token = generateToken({role: user.role, email: user.email, name: user.name});
         const refreshToken = generateRefreshToken(user)
-        console.log(token)
-        console.log(refreshToken)
         refreshTokens.push(refreshToken)
         res.json({
             accessToken: token,
@@ -122,9 +135,10 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/refresh', (req, res) => {
+    console.log("refresh req")
+
     //take the refresh token from the user
     const refreshToken = req.body.token;
-    console.log("LOL")
   
     //send error if there is no token or it's invalid
     if (!refreshToken) return res.status(401).json("You are not authenticated!");
@@ -135,7 +149,7 @@ app.post('/refresh', (req, res) => {
       err && console.log(err);
       refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
   
-      const newAccessToken = generateAccessToken(user);
+      const newAccessToken = generateToken({role: user.role, email: user.email, name: user.name});
       const newRefreshToken = generateRefreshToken(user);
   
       refreshTokens.push(newRefreshToken);

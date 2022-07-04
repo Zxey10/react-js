@@ -1,0 +1,11 @@
+@mixin d-flex($direction){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+@mixin mx($size){
+    margin-left: $size;
+    margin-right: $size;
+}

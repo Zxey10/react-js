@@ -1,0 +1,42 @@
+.contact{
+    & .rectangles{
+        margin-top: 2rem;
+        margin-bottom: 5rem;
+        display: flex;
+    & .big-container{
+        & .big{
+            width: 1000px;
+            height: 500px;
+            background-color: hotpink;
+        }  
+    }
+    & .right-container{
+        display: flex;
+        margin-left: 20px;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        & .medium{
+            width: 420px;
+            height: 280px;
+            background-color: darkorange;
+        }  
+        & .rect-sm{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            & .rect-sm-1{
+                width: 200px;
+                height: 200px;
+                background-color: rebeccapurple;
+            }
+            & .rect-sm-2{
+                width: 200px;
+                height: 200px;
+                background-color: red;
+            }
+        }
+    }
+  }
+}

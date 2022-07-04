@@ -1,0 +1,15 @@
+.sidebar{
+    width: pxToRem(100px);
+    background: linear-gradient(0deg, #F29F05 0%, rgba(242, 159, 5, 0) 25.31%), linear-gradient(0deg, rgba(242, 5, 159, 0.7) 38.33%, rgba(242, 5, 159, 0) 100%), linear-gradient(0deg, #F2F2F2 99.99%, rgba(242, 109, 182, 0) 100%);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    @include d-flex(row);
+    &__text{
+        margin: auto;
+        color: white;
+        writing-mode: vertical-lr;
+        font-size: pxToRem(48px);
+    }
+}

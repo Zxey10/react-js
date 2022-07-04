@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserData, login, logout, refreshToken } from "./authThunk";
+import { fetchUserData, login, logout, refreshTokenThunk } from "./authThunk";
 
 const initialToken = localStorage.getItem('token')
 const initialRefreshToken = localStorage.getItem('refresh_token')
@@ -20,9 +20,9 @@ const authSlice = createSlice({
             console.log("LOGIN")
             state.isAuth = true
         },
-        onRefreshToken(state,action){
+        onRefreshToken(state, action){
             const { accessToken, refreshToken } = action.payload;
-            state.accessToken = accessToken;
+            state.token = accessToken;
             state.refreshToken = refreshToken
         }
     },
@@ -31,7 +31,6 @@ const authSlice = createSlice({
             state.loading = false;
             state.userData = {};
             state.token = null;
-            state.refreshToken = null;
         },
         [login.fulfilled]: (state,action) => {
             const { user, accessToken, refreshToken } = action.payload;
@@ -59,24 +58,16 @@ const authSlice = createSlice({
         [fetchUserData.rejected]: (state,action) => {
             console.log('ERROR')
             state.loading = false;
+            state.userData = {};
             state.token = null;
-            state.userData = {};
             state.refreshToken = null;
         },
-        [refreshToken.fulfilled]: (state,action) => {
-            console.log("Refreshed Token")
-            const { token, refreshToken } = action.payload
-            state.token = token;
+        [refreshTokenThunk.fulfilled]: (state,action) => {
+            const { accessToken, refreshToken } = action.payload;
+            state.token = accessToken;
             state.refreshToken = refreshToken;
-        },
-        [refreshToken.rejected]: (state,action) => {
-            console.log("Rejected Refresh")
-            state.accessToken = null;
-            state.refreshToken = null;
-            state.loading = false;
-            state.userData = {};
         }
-
+        
     }
 })
 

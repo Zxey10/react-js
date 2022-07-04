@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { logout } from "../store/authThunk";
+import { fetchUserData, logout } from "../store/authThunk";
 
 
 export default function Navbar() {
@@ -16,6 +16,10 @@ export default function Navbar() {
 
   function logoutHandler() {
     dispatch(logout())
+  }
+
+  function getUser(){
+    dispatch(fetchUserData())
   }
 
   return (
@@ -30,6 +34,7 @@ export default function Navbar() {
             {!isAuth && <NavLink className={({isActive}) => isActive ? styles.active : ''} to="/register">Register</NavLink>}
             { isAuth && <NavLink className={({isActive}) => isActive ? styles.active : ''} to="/test">Test</NavLink>}
             { isAuth && <NavLink onClick={logoutHandler} to="/">Logout</NavLink>}
+            <button onClick={getUser}>Click</button>
           </Nav>
         </Container>
       </NavBar>

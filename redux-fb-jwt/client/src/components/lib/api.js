@@ -27,4 +27,4 @@ export const fetchExpenseById = async (expenseId) => {
         ...json,
     };
     return data;
-};
+}

@@ -2,21 +2,29 @@
 .slider {
   margin: 1rem 2rem;
 }
+.slider > * {
+  margin: 0;
+  padding: 0;
+}
 .slider .slick-slider {
   max-height: 400px;
 }
-.slider .slick-slider .slider__img {
+.slider .slick-slider .slick-list .slider__img {
   max-height: 400px;
 }
-.slider .slick-slider .slider__img img {
-  margin-left: 2rem;
+.slider .slick-slider .slick-list .slider__img img {
+  margin-inline: auto;
   -o-object-fit: cover;
      object-fit: cover;
   height: 200px;
   cursor: pointer;
 }
+.slider .slick-slider .slick-dots li button::before {
+  color: white;
+}
 
 .footer {
+  padding: 1rem;
   overflow: hidden;
   position: fixed;
   bottom: 0;
@@ -27,24 +35,29 @@
   align-items: center;
   flex-direction: column;
 }
+.footer > * {
+  margin: 0;
+  padding: 0;
+}
 .footer hr {
+  margin-bottom: 1rem;
   width: 80%;
   border-top: 1px solid white;
 }
-.footer .footer__list {
+.footer__list {
   list-style: none;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.footer .footer__list li {
+.footer__list li {
   margin: 0 1rem;
 }
-.footer .footer__list li a img {
+.footer__list li a img {
   width: 32px;
   height: 32px;
 }
-.footer p {
-  margin: auto 0;
-  margin-bottom: 1rem;
+.footer__cp {
   color: #FFFFFF;
 }
 
@@ -70,5 +83,5 @@ body {
 }
 
 main {
-  margin: 0 5rem;
+  margin-inline: 3rem;
 }/*# sourceMappingURL=index.css.map */

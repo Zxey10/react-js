@@ -1,0 +1,67 @@
+.landing{
+    flex-grow: 1;
+    &__description{
+        margin-top: 50px;
+        max-width: 1000px;
+        font-size: pxToRem(24px);
+        font-weight: 400;
+        color: black;
+        margin-bottom: 25px;
+    }
+    &__btn{
+        & .btn{
+            font-weight: 700;
+            text-transform: none;
+            font-size: 32px;
+            color: white;
+            font-family: 'Oswald',sans-serif;
+            width: 320px;
+            height: 75px;
+        }
+        &--orange{
+            background-color: #F29F05;
+            margin-right: 30px;           
+        }
+        &--pink{
+            background-color: #F2059F;
+        }
+    }
+    &__imgs{
+        margin-top: 70px;
+        max-width: 1500px;
+        margin-bottom: 15px;
+        display: grid;
+        column-gap: 10px;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-rows: 300px 150px;
+        grid-template-areas: "big big medium medium"
+                             "big big sm sm" ;
+        justify-content: start;
+        row-gap: 10px;
+        &--big{
+            background-color: #d9d9d9;
+            grid-area: big;
+        }
+        &--medium{
+            background-color: #d9d9d9;
+            grid-area: medium;
+        }
+        &__small{
+            display: grid;
+            grid-area: sm;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 15px;
+            grid-template-areas: "item-1 item-2";
+            justify-content: space-between;
+            &--sm1{
+                grid-area: item-1;
+                background-color: #d9d9d9;
+            }
+    
+            &--sm2{
+                grid-area: item-2;
+                background-color: #d9d9d9;
+            }
+        }
+    }
+}

@@ -15,8 +15,16 @@
                         height: 200px;
                         cursor: pointer;
                     }
-                
+               
+            }
+        }
+        & .slick-dots{
+            & li{
+                & button::before{
+                    color: white;
+                }
             }
         }
     }
 }
+

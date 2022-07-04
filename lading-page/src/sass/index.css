@@ -35,6 +35,21 @@
   cursor: pointer;
 }
 
+.sidebar {
+  margin-left: auto;
+  height: calc(100vh - 4.75rem);
+  width: 75px;
+  background-color: rgb(66, 191, 21);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar__text {
+  -ms-writing-mode: tb-lr;
+      writing-mode: vertical-lr;
+  color: white;
+}
+
 body {
   background-color: #212121;
 }/*# sourceMappingURL=index.css.map */
