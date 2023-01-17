@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import UserForm from './components/UserForm';
 import UserList from './components/UserList';
 import Popup from './components/Popup';
@@ -34,15 +34,31 @@ function App() {
     })
   }
 
+  const div = useRef(null);
+
   function onDismisPopup(){
     setIsPopupVisible(false)
   }
 
+  const addAnim = () => {
+    div.current.classList.add("anim");
+  };
+
+
+
+
   return (
    <div className='App'>
-     <Popup className={!isPopupVisible ? 'hidden': ''} closePopup={onDismisPopup} errorText={errorText}/>
+     {/* <Popup className={!isPopupVisible ? 'hidden': ''} closePopup={onDismisPopup} errorText={errorText}/>
      <UserForm createUser={onCreateUser}/>
-     <UserList users={users}/>
+     <UserList users={users}/> */}
+
+     <div ref={div} className='rect'>
+
+     </div>
+
+     <button onClick={addAnim}>Play Anim</button>
+
    </div>
   );
 }

@@ -1,31 +1,95 @@
-*{
+@import url('https://fonts.googleapis.com/css2?family=Average+Sans&family=Oxygen:wght@400;700&display=swap');* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Oxygen', sans-serif;
 }
-.mainDiv{
+
+.custom-shape-divider-bottom-1664294398 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1664294398 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 156px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1664294398 .shape-fill {
+  fill: #FFFFFF;
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+  .custom-shape-divider-bottom-1664294398 svg {
+      width: calc(100% + 1.3px);
+      height: 67px;
+  }
+}
+
+.mainDiv {
   display: flex;
-  height: 500px;
+  height: 100vh;
+  position: relative;
+  background: no-repeat fixed center center url('https://images4.alphacoders.com/286/286946.jpg');
+  background-size: cover;
+
+
+
 }
-.canvasDiv{
+
+.header-text .header-title{
+  /* -webkit-text-fill-color: transparent; */
+  font-size: 3.5rem;
+  align-self: flex-start;
+
+}
+
+.header-text .header-title .header-p{
+  font-size: 2.5rem;
+}
+
+.canvasDiv {
   width: 50%;
 }
-.header-text{
+
+ .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color:rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+.header-text {
   width: 50%;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   color: white;
   align-items: center;
   padding: 2rem;
+  margin-left: 3rem;
 }
-.header-text p{
-  margin: 1rem;
+
+.header-text p {
   margin-top: 2rem;
   text-align: justify;
 }
-.btns{
+
+.btns {
   display: flex;
   flex-direction: column;
   margin: 0.5rem;
@@ -33,7 +97,7 @@
   align-items: center;
 }
 
-.btns button{
+.btns button {
   padding: 0.25rem;
   color: white;
   border-radius: 10px;
@@ -42,12 +106,14 @@
   cursor: pointer;
 }
 
-.btns button:nth-of-type(1){
+.btns button:nth-of-type(1) {
   background-color: orangered;
 }
-.btns button:nth-of-type(2){
+
+.btns button:nth-of-type(2) {
   background-color: coral;
 }
-.btns button:nth-of-type(3){
+
+.btns button:nth-of-type(3) {
   background-color: royalblue;
 }

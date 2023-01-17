@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Earth from './Earth';
 import Europa from './Europa';
+import Nova from './Nova';
 
 function App() {
 
@@ -44,8 +45,8 @@ function App() {
   return (
     <div className='mainDiv'>
       <div className='header-text'>
-        <h1>React 3D Example</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non nostrum numquam fugiat dolores consequuntur quam tempora tenetur est totam iure, autem ab fuga unde vitae doloremque molestiae quos repellendus omnis!</p>
+        <h1 className='header-title'>Is The Earth Flat?</h1>
+        <p className='header-p'>Physicists will find it shocking, but there are plenty of people around the world who genuinely believe the Earth is flat. Rachel Brazil explores why such views are increasingly taking hold and how the physics community should best respond</p>
       </div>
       <div className='canvasDiv'>
         <Canvas className='canvas'>
@@ -55,6 +56,7 @@ function App() {
             <OrbitControls enableZoom={true} target={[0, 0, -100]} autoRotate={true} />
             <Earth rotation={rotations} />
             <Europa />
+            {/* <Nova /> */}
           </Suspense>
         </Canvas>
       </div>
